@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Main Activity</string>
 
+    <string name="hint_keyword">Type Keyword</string>
+
     <string name="button_label_go">Go</string>
 </resources>
