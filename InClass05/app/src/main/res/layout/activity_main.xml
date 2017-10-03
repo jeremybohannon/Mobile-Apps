@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="mobileapps.com.inclass05.MainActivity">
 
-    <MultiAutoCompleteTextView
+    <AutoCompleteTextView
         android:id="@+id/keyword"
         android:layout_width="0dp"
         android:layout_height="0dp"
