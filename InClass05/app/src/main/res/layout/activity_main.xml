@@ -5,7 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="mobileapps.com.inclass05.MainActivity">
-
+<!--
+/In class 5
+//activity_main.xml
+//Elizabeth Thompson Jeremy Bohannon
+-->
     <AutoCompleteTextView
         android:id="@+id/keyword"
         android:layout_width="0dp"

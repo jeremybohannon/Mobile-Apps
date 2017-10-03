@@ -1,4 +1,8 @@
 <resources>
+    <!--
+    /In class 5
+//strings.xml
+//Elizabeth Thompson Jeremy Bohannon-->
     <string name="app_name">Main Activity</string>
 
     <string name="hint_keyword">Type Keyword</string>

@@ -22,6 +22,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+//In class 5
+//MainActivity.java
+//Elizabeth Thompson Jeremy Bohannon
+
 public class MainActivity extends AppCompatActivity {
     AutoCompleteTextView keyword;
     private static String[] KEYWORDS = new String[] {};
@@ -69,10 +73,8 @@ public class MainActivity extends AppCompatActivity {
                     new GetImageAsync(photo).execute(requests[currentKeywordIndex]);
                 }
                 if(currentKeywordIndex == 0){
-                    prevBtn.setEnabled(false);
-                }
-                if(currentKeywordIndex < keywordsAmount){
-                    nextBtn.setEnabled(true);
+                    currentKeywordIndex = keywordsAmount;
+                    new GetImageAsync(photo).execute(requests[currentKeywordIndex]);
                 }
             }
         });
@@ -82,20 +84,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 progress.setTitle("Loading images...");
                 progress.show();
-                if(currentKeywordIndex == keywordsAmount){
-                    nextBtn.setEnabled(false);
-                } else {
-                    nextBtn.setEnabled(true);
-                }
                 if(currentKeywordIndex < keywordsAmount){
                     currentKeywordIndex++;
                     new GetImageAsync(photo).execute(requests[currentKeywordIndex]);
                 }
                 if(currentKeywordIndex == keywordsAmount){
-                    nextBtn.setEnabled(false);
-                }
-                if(currentKeywordIndex > 0){
-                    prevBtn.setEnabled(true);
+                    currentKeywordIndex = 0;
+                    new GetImageAsync(photo).execute(requests[currentKeywordIndex]);
                 }
             }
         });
@@ -114,6 +109,8 @@ public class MainActivity extends AppCompatActivity {
                 currentKeyword = keyword.getText().toString();
                 progress.setTitle("Loading images...");
                 progress.show();
+                prevBtn.setEnabled(false);
+                nextBtn.setEnabled(false);
                 new Connection(true).execute("http://dev.theappsdr.com/apis/photos/index.php?keyword=" + currentKeyword);
             }
         });
@@ -188,9 +185,16 @@ public class MainActivity extends AppCompatActivity {
                 if(result.length() == 0){
                     photo.setImageResource(R.drawable.picture);
                     Toast.makeText(MainActivity.this, "No images found", Toast.LENGTH_SHORT).show();
+                    progress.cancel();
                 } else {
                     new GetImageAsync(photo).execute(requests[currentKeywordIndex]);
-                    nextBtn.setEnabled(true);
+                    if(keywordsAmount == 1){
+                        nextBtn.setEnabled(false);
+                        prevBtn.setEnabled(false);
+                    } else {
+                        nextBtn.setEnabled(true);
+                        prevBtn.setEnabled(true);
+                    }
                 }
             } else {
                 // setup the autocomplete for keyword search
