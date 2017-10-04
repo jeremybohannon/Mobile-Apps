@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
         triviaImage = (ImageView) findViewById(R.id.triviaImage);
         statusView = (TextView) findViewById(R.id.statusView);
         startBtn = (Button) findViewById(R.id.startBtn);
+        exitBtn = (Button) findViewById(R.id.exitBtn);
+        exitBtn.setOnClickListener(exitBtnListener);
 
         if(isConnected()) {
             new AsyncQuestion(this).execute("http://dev.theappsdr.com/apis/trivia_json/trivia_text.php");
@@ -39,15 +41,22 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, "No internet connection", Toast.LENGTH_SHORT).show();
         }
 
-
-
     }
+
+    Button.OnClickListener exitBtnListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            android.os.Process.killProcess(android.os.Process.myPid());
+            System.exit(1);
+        }
+    };
 
     public void setQuestions(String questions){
         progressBar.setVisibility(View.GONE);
         triviaImage.setVisibility(View.VISIBLE);
         statusView.setText(R.string.statusDone);
         startBtn.setEnabled(true);
+        
         System.out.println(questions);
 
 
