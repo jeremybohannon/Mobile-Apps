@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView triviaImage;
     TextView statusView;
     Button exitBtn, startBtn;
-    ArrayList<Question> questions;
+    ArrayList<Question> questionList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,10 +56,21 @@ public class MainActivity extends AppCompatActivity {
         triviaImage.setVisibility(View.VISIBLE);
         statusView.setText(R.string.statusDone);
         startBtn.setEnabled(true);
-        
-        System.out.println(questions);
 
+        String[] questionsArr = questions.split("\n");
 
+        for (int i = 0; i <= questionsArr.length - 1; i++) {
+            String[] question = questionsArr[i].split(";");
+            String triviaQuestion = question[1];
+            String triviaPhoto = question[2];
+            String[] answerChoices = new String[question.length -2];
+            for(int j = 3; j < question.length - 1; j++){
+                answerChoices[j - 3] = question[j];
+            }
+            int answerIndex = Integer.parseInt(question[question.length - 1]);
+
+            questionList.add(new Question(triviaQuestion, triviaPhoto, answerChoices, answerIndex));
+        }
     }
 
     private boolean isConnected() {
