@@ -6,4 +6,118 @@
     android:layout_height="match_parent"
     tools:context="com.example.jeremybohannon.hmwk3.TriviaActivity">
 
+    <TextView
+        android:id="@+id/questionNum"
+        android:layout_width="150dp"
+        android:layout_height="25dp"
+        android:background="@color/blue"
+        android:gravity="center"
+        android:text="Time Left: X seconds"
+        tools:layout_editor_absoluteX="218dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <TextView
+        android:id="@+id/timeLeft"
+        android:layout_width="68dp"
+        android:layout_height="25dp"
+        android:background="@color/blue"
+        android:gravity="center"
+        android:text="Q1"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <ImageView
+        android:id="@+id/questionImage"
+        android:layout_width="351dp"
+        android:layout_height="126dp"
+        app:srcCompat="?android:attr/listChoiceBackgroundIndicator"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="58dp" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guidelineLeft"
+        app:layout_constraintGuide_begin="367dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="367dp" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guidelineRight"
+        app:layout_constraintGuide_begin="16dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <TextView
+        android:id="@+id/questionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Question text goes here . . ."
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="200dp" />
+
+    <TextView
+        android:id="@+id/optionOne"
+        android:layout_width="351dp"
+        android:layout_height="29dp"
+        android:background="?android:attr/colorControlHighlight"
+        android:gravity="center_vertical"
+        android:paddingLeft="5dp"
+        android:text="Option 1"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="235dp" />
+
+    <TextView
+        android:id="@+id/optionTwo"
+        android:layout_width="351dp"
+        android:layout_height="29dp"
+        android:background="?android:attr/colorControlHighlight"
+        android:gravity="center_vertical"
+        android:paddingLeft="5dp"
+        android:text="Option 2"
+        tools:layout_editor_absoluteX="17dp"
+        tools:layout_editor_absoluteY="280dp" />
+
+    <TextView
+        android:id="@+id/optionThree"
+        android:layout_width="351dp"
+        android:layout_height="29dp"
+        android:background="?android:attr/colorControlHighlight"
+        android:gravity="center_vertical"
+        android:paddingLeft="5dp"
+        android:text="Option 3"
+        tools:layout_editor_absoluteX="17dp"
+        tools:layout_editor_absoluteY="325dp" />
+
+    <TextView
+        android:id="@+id/optionFour"
+        android:layout_width="351dp"
+        android:layout_height="29dp"
+        android:background="?android:attr/colorControlHighlight"
+        android:gravity="center_vertical"
+        android:paddingLeft="5dp"
+        android:text="Option 4"
+        tools:layout_editor_absoluteX="17dp"
+        tools:layout_editor_absoluteY="370dp" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Next"
+        tools:layout_editor_absoluteX="280dp"
+        tools:layout_editor_absoluteY="415dp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quit"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="415dp" />
+
 </android.support.constraint.ConstraintLayout>
