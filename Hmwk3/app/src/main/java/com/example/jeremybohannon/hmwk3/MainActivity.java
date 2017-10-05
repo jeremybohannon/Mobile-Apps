@@ -1,6 +1,7 @@
 package com.example.jeremybohannon.hmwk3;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -71,6 +71,14 @@ public class MainActivity extends AppCompatActivity {
 
             questionList.add(new Question(triviaQuestion, triviaPhoto, answerChoices, answerIndex));
         }
+
+        startTriviaIntent();
+    }
+
+    public void startTriviaIntent(){
+        Intent intent = new Intent(MainActivity.this, TriviaActivity.class);
+        intent.putExtra("EXTRA__QUESTIONS", questionList);
+        startActivity(intent);
     }
 
     private boolean isConnected() {
