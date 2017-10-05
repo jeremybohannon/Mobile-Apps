@@ -9,4 +9,6 @@
     <string name="correctAnswers">Correct Answers</string>
     <string name="tryAgain">Try again and see if you can get all the correct answers!</string>
     <string name="tryAgainBtn">Try Again</string>
+    <string name="timeLeft">Time Left: 120 seconds</string>
+    <string name="percentCorrect">%</string>
 </resources>

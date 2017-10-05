@@ -3,6 +3,7 @@ package com.example.jeremybohannon.hmwk3;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.CountDownTimer;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,6 +32,9 @@ public class TriviaActivity extends AppCompatActivity {
     private ArrayList<Integer> userAnswers = new ArrayList<>();
 
     ProgressBar progressBarImage;
+    Boolean hasSelected = false;
+    Boolean hasStarted = false;
+    int correctAnswers = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +66,22 @@ public class TriviaActivity extends AppCompatActivity {
         }
     }
 
+    void startTimer(){
+        new CountDownTimer(120000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                timeLeft.setText("Time Left: " + millisUntilFinished / 1000 + " seconds");
+            }
+
+            public void onFinish() {
+                Intent intent = new Intent(TriviaActivity.this, StatsActivity.class);
+                intent.putExtra("EXTRA_CORRECT", correctAnswers);
+                startActivity(intent);
+
+            }
+        }.start();
+    }
+
     void setPhoto(Bitmap bitmap){
         questionImage.setImageBitmap(bitmap);
         progressBarImage.setVisibility(View.GONE);
@@ -76,7 +96,8 @@ public class TriviaActivity extends AppCompatActivity {
         nextBtn.setEnabled(false);
         new AsyncImage(this).execute(currentQuestion.getTriviaPhoto());
 
-        questionNum.setText("" + questionIndex + 1);
+        String questionTextTemp = "Q" + (questionIndex + 1);
+        questionNum.setText(questionTextTemp);
         questionText.setText(currentQuestion.getTriviaQuestion());
 
         String[] answerChoices = currentQuestion.getAnswerChoices();
@@ -101,18 +122,14 @@ public class TriviaActivity extends AppCompatActivity {
         public void onCheckedChanged(RadioGroup radioGroup, @IdRes int id) {
             RadioButton option = (RadioButton) findViewById(id);
 
-            Question currentQuestion = questionList.get(questionIndex);
-            String[] answerChoices = currentQuestion.getAnswerChoices();
-
-            for (int i = 0; i < answerChoices.length; i++) {
-                if (option.getText().equals(answerChoices[i])) {
-                    if (questionIndex > userAnswers.size() - 1) {
-                        userAnswers.add(i);
-                    } else {
-                        userAnswers.set(questionIndex, i);
-                    }
-                }
+            if(!hasStarted){
+                hasStarted = true;
+                startTimer();
             }
+            hasSelected = true;
+            Question currentQuestion = questionList.get(questionIndex);
+
+            if(option.getId() == currentQuestion.getAnswerIndex()) correctAnswers++;
         }
     };
 
@@ -126,17 +143,17 @@ public class TriviaActivity extends AppCompatActivity {
     Button.OnClickListener nextOnClick = new Button.OnClickListener() {
         @Override
         public void onClick(View view) {
-            if (questionIndex == userAnswers.size()) {
+            if (!hasSelected) {
                 Toast.makeText(TriviaActivity.this, "Please select an answer choice.", Toast.LENGTH_SHORT).show();
                 return;
             }
-
+            hasSelected = false;
             if (questionIndex != questionList.size() - 1) {
                 questionIndex++;
                 loadQuestionData(questionIndex);
             } else {
                 Intent intent = new Intent(TriviaActivity.this, StatsActivity.class);
-                intent.putExtra("USER_ANSWERS", userAnswers);
+                intent.putExtra("EXTRA_CORRECT", correctAnswers);
                 startActivity(intent);
             }
         }
