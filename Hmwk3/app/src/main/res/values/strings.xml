@@ -3,7 +3,7 @@
 //Jeremy Bohannon Elizabeth Thompson
 //strings.xml
 //Hmwk3-->
-    <string name="app_name">Hmwk3</string>
+    <string name="app_name">Trivia App</string>
     <string name="welcome">Welcome to Trivia App</string>
     <string name="status">Loading Image</string>
     <string name="statusDone">Trivia Ready</string>
