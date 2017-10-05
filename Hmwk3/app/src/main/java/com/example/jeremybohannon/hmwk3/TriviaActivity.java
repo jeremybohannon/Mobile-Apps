@@ -113,7 +113,7 @@ public class TriviaActivity extends AppCompatActivity {
                 Log.d("debug", answerChoices[i]);
 
                 RadioButton answerChoice = new RadioButton(this);
-                answerChoice.setId(questionIndex + i);
+                answerChoice.setId(i);
                 answerChoice.setText(answerChoices[i]);
                 answerChoiceGroup.addView(answerChoice);
             }
@@ -131,8 +131,9 @@ public class TriviaActivity extends AppCompatActivity {
             }
             hasSelected = true;
             Question currentQuestion = questionList.get(questionIndex);
-
+            System.out.println("\n\n\nOur option: " + option.getId() + "Correct option: " +currentQuestion.getAnswerIndex() );
             if(option.getId() == currentQuestion.getAnswerIndex()) correctAnswers++;
+            System.out.println("\n\n\ncorrect: " + correctAnswers);
         }
     };
 
