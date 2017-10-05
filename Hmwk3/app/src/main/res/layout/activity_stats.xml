@@ -102,6 +102,7 @@
                     android:layout_gravity="center_vertical|center"
                     android:gravity="center"
                     android:text="@string/percentCorrect"
+                    android:textColor="@android:color/holo_green_light"
                     android:textSize="30sp" />
 
                 <ProgressBar

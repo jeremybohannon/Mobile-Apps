@@ -36,6 +36,10 @@ public class TriviaActivity extends AppCompatActivity {
     Boolean hasStarted = false;
     int correctAnswers = 0;
 
+    int tmpOptionId, tmpQuestionId;
+
+    CountDownTimer countDownTimer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,14 +56,24 @@ public class TriviaActivity extends AppCompatActivity {
 
         quitBtn = (Button) findViewById(R.id.quitBtn);
         nextBtn = (Button) findViewById(R.id.nextBtn);
-        nextBtn.setEnabled(false);
+
         quitBtn.setOnClickListener(quitOnClick);
         nextBtn.setOnClickListener(nextOnClick);
 
+
         progressBarImage = (ProgressBar) findViewById(R.id.progressBarImage);
 
-        int REQCODE = 1337;
 
+        init();
+    }
+
+    void init(){
+        timeLeft.setText(R.string.timeLeft);
+        countDownTimer = null;
+        hasSelected = false;
+        hasStarted = false;
+        correctAnswers = 0;
+        nextBtn.setEnabled(false);
         if (getIntent() != null && getIntent().getExtras() != null) {
             questionList = (ArrayList<Question>) getIntent().getExtras().getSerializable("EXTRA__QUESTIONS");
 
@@ -69,7 +83,7 @@ public class TriviaActivity extends AppCompatActivity {
     }
 
     void startTimer(){
-        new CountDownTimer(120000, 1000) {
+        countDownTimer = new CountDownTimer(120000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 timeLeft.setText("Time Left: " + millisUntilFinished / 1000 + " seconds");
@@ -79,7 +93,7 @@ public class TriviaActivity extends AppCompatActivity {
                 Intent intent = new Intent(TriviaActivity.this, StatsActivity.class);
                 System.out.println("On finish.. correct answers: " + correctAnswers );
                 intent.putExtra("EXTRA_CORRECT", correctAnswers);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
 
             }
         }.start();
@@ -131,20 +145,20 @@ public class TriviaActivity extends AppCompatActivity {
             }
             hasSelected = true;
             Question currentQuestion = questionList.get(questionIndex);
-            System.out.println("\n\n\nOur option: " + option.getId() + "Correct option: " +currentQuestion.getAnswerIndex() );
-            if(option.getId() == currentQuestion.getAnswerIndex()) correctAnswers++;
-            System.out.println("\n\n\ncorrect: " + correctAnswers);
+
+            tmpOptionId = option.getId();
+            tmpQuestionId = currentQuestion.getAnswerIndex();
         }
     };
 
-    Button.OnClickListener quitOnClick = new Button.OnClickListener() {
+    Button.OnClickListener quitOnClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             finish();
         }
     };
 
-    Button.OnClickListener nextOnClick = new Button.OnClickListener() {
+    Button.OnClickListener nextOnClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             if (!hasSelected) {
@@ -152,10 +166,14 @@ public class TriviaActivity extends AppCompatActivity {
                 return;
             }
             hasSelected = false;
+
+            if(tmpOptionId == tmpQuestionId) correctAnswers++;
+
             if (questionIndex != questionList.size() - 1) {
                 questionIndex++;
                 loadQuestionData(questionIndex);
             } else {
+                countDownTimer.cancel();
                 Intent intent = new Intent(TriviaActivity.this, StatsActivity.class);
                 System.out.println("On next.. correct answers: " + correctAnswers );
                 intent.putExtra("EXTRA_CORRECT", correctAnswers);
@@ -166,6 +184,10 @@ public class TriviaActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        finish();
+        if(resultCode == RESULT_OK){
+            init();
+        } else {
+            finish();
+        }
     }
 }

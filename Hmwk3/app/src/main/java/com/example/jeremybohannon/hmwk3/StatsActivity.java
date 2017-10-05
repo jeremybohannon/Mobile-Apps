@@ -1,5 +1,6 @@
 package com.example.jeremybohannon.hmwk3;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,7 +10,7 @@ import android.widget.TextView;
 
 public class StatsActivity extends AppCompatActivity {
 
-    TextView percentageViewStats;
+    TextView percentageViewStats, tryAgainView;
     ProgressBar progressBarStats;
 
     Button exitBtn, tryAgainBtn;
@@ -18,7 +19,8 @@ public class StatsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stats);
-
+        tryAgainView = (TextView) findViewById(R.id.tryAgainView);
+        tryAgainView.setText(R.string.tryAgain);
         int correctAnswers = 0;
         double totalQuestions = 15.0;
         double percentCorrect;
@@ -43,11 +45,27 @@ public class StatsActivity extends AppCompatActivity {
 
         exitBtn.setOnClickListener(exitBtnListener);
 
+        tryAgainBtn = (Button) findViewById(R.id.tryAgainBtn);
+        tryAgainBtn.setOnClickListener(tryAgainListener);
+
+        if(correctAnswers == totalQuestions) tryAgainView.setText("Congrats!");
+
     }
 
     Button.OnClickListener exitBtnListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            finish();
+        }
+    };
+
+
+
+    Button.OnClickListener tryAgainListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent returnIntent = new Intent();
+            setResult(TriviaActivity.RESULT_OK, returnIntent);
             finish();
         }
     };
