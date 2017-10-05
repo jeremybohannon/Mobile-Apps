@@ -27,7 +27,7 @@ public class TriviaActivity extends AppCompatActivity {
         optionThree   = (TextView) findViewById(R.id.optionThree);
         optionFour    = (TextView) findViewById(R.id.optionFour);
 
-        quitBtn = (Button) findViewById(R.id.quitBtn);
+        quitBtn = (Button) findViewById(R.id.exitBtn);
         nextBtn = (Button) findViewById(R.id.nextBtn);
     }
 }
