@@ -58,6 +58,8 @@ public class TriviaActivity extends AppCompatActivity {
 
         progressBarImage = (ProgressBar) findViewById(R.id.progressBarImage);
 
+        int REQCODE = 1337;
+
         if (getIntent() != null && getIntent().getExtras() != null) {
             questionList = (ArrayList<Question>) getIntent().getExtras().getSerializable("EXTRA__QUESTIONS");
 
@@ -75,6 +77,7 @@ public class TriviaActivity extends AppCompatActivity {
 
             public void onFinish() {
                 Intent intent = new Intent(TriviaActivity.this, StatsActivity.class);
+                System.out.println("On finish.. correct answers: " + correctAnswers );
                 intent.putExtra("EXTRA_CORRECT", correctAnswers);
                 startActivity(intent);
 
@@ -153,9 +156,15 @@ public class TriviaActivity extends AppCompatActivity {
                 loadQuestionData(questionIndex);
             } else {
                 Intent intent = new Intent(TriviaActivity.this, StatsActivity.class);
+                System.out.println("On next.. correct answers: " + correctAnswers );
                 intent.putExtra("EXTRA_CORRECT", correctAnswers);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
             }
         }
     };
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        finish();
+    }
 }
