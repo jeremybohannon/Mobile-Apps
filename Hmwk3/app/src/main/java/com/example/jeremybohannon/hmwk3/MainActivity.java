@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         if(isConnected()) {
+            System.out.println("[ MainActivity | onCreate ] Requesting data...");
             new AsyncQuestion(this).execute("http://dev.theappsdr.com/apis/trivia_json/trivia_text.php");
         } else {
             Toast.makeText(MainActivity.this, "No internet connection", Toast.LENGTH_SHORT).show();
@@ -61,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
     };
 
     public void setQuestions(String questions){
+        System.out.println("[ MainActivity | setQuestions ] Got questions... making objects..");
         String[] questionsArr = questions.split("\n");
 
         for (int i = 0; i <= questionsArr.length - 1; i++) {

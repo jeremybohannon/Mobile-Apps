@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -29,6 +30,8 @@ public class TriviaActivity extends AppCompatActivity {
     private int questionIndex;
     private ArrayList<Integer> userAnswers = new ArrayList<>();
 
+    ProgressBar progressBarImage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,9 +48,11 @@ public class TriviaActivity extends AppCompatActivity {
 
         quitBtn = (Button) findViewById(R.id.quitBtn);
         nextBtn = (Button) findViewById(R.id.nextBtn);
-
+        nextBtn.setEnabled(false);
         quitBtn.setOnClickListener(quitOnClick);
         nextBtn.setOnClickListener(nextOnClick);
+
+        progressBarImage = (ProgressBar) findViewById(R.id.progressBarImage);
 
         if (getIntent() != null && getIntent().getExtras() != null) {
             questionList = (ArrayList<Question>) getIntent().getExtras().getSerializable("EXTRA__QUESTIONS");
@@ -57,11 +62,19 @@ public class TriviaActivity extends AppCompatActivity {
         }
     }
 
+    void setPhoto(Bitmap bitmap){
+        questionImage.setImageBitmap(bitmap);
+        progressBarImage.setVisibility(View.GONE);
+        questionImage.setVisibility(View.VISIBLE);
+        nextBtn.setEnabled(true);
+    }
+
     private void loadQuestionData(int questionIndex) {
         Question currentQuestion = questionList.get(questionIndex);
-
-        Bitmap image = BitmapFactory.decodeFile(currentQuestion.getTriviaPhoto());
-        questionImage.setImageBitmap(image);
+        questionImage.setVisibility(View.GONE);
+        progressBarImage.setVisibility(View.VISIBLE);
+        nextBtn.setEnabled(false);
+        new AsyncImage(this).execute(currentQuestion.getTriviaPhoto());
 
         questionNum.setText("" + questionIndex + 1);
         questionText.setText(currentQuestion.getTriviaQuestion());
@@ -103,14 +116,14 @@ public class TriviaActivity extends AppCompatActivity {
         }
     };
 
-    View.OnClickListener quitOnClick = new View.OnClickListener() {
+    Button.OnClickListener quitOnClick = new Button.OnClickListener() {
         @Override
         public void onClick(View view) {
-            // TODO
+            finish();
         }
     };
 
-    View.OnClickListener nextOnClick = new View.OnClickListener() {
+    Button.OnClickListener nextOnClick = new Button.OnClickListener() {
         @Override
         public void onClick(View view) {
             if (questionIndex == userAnswers.size()) {

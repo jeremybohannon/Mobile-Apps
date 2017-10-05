@@ -17,6 +17,7 @@ public class AsyncQuestion extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String... strings) {
+        System.out.println("[ MainActivity | doInBackground ] In async task");
         StringBuilder stringBuilder = new StringBuilder();
         HttpURLConnection connection = null;
         BufferedReader reader = null;
@@ -26,6 +27,7 @@ public class AsyncQuestion extends AsyncTask<String, Void, String> {
             connection = (HttpURLConnection) url.openConnection();
             connection.connect();
             if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                System.out.println("[ AsyncQuestions | doInBackground ] Got response... making string..");
                 reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 String line = "";
                 while ((line = reader.readLine()) != null) {
@@ -34,7 +36,7 @@ public class AsyncQuestion extends AsyncTask<String, Void, String> {
                 result = stringBuilder.toString();
             }
         } catch (Exception e) {
-            //Handle the exceptions
+            System.out.println("Error: " + e.toString());
         } finally {
             //Close open connections and reader
             if (connection != null) {
