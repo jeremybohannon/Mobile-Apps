@@ -19,7 +19,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-
+//Jeremy Bohannon Elizabeth Thompson
+//TriviaActivity.java
+//Hmwk3
 public class TriviaActivity extends AppCompatActivity {
 
     private ImageView questionImage;

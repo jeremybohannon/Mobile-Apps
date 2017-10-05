@@ -11,7 +11,9 @@ import java.net.URL;
 /**
  * Created by jeremybohannon on 10/4/17.
  */
-
+//Jeremy Bohannon Elizabeth Thompson
+//AsyncImage.java
+//Hmwk3
 
 public class AsyncImage extends AsyncTask<String, Void, String> {
 

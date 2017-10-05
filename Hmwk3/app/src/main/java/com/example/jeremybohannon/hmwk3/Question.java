@@ -1,7 +1,9 @@
 package com.example.jeremybohannon.hmwk3;
 
 import java.io.Serializable;
-
+//Jeremy Bohannon Elizabeth Thompson
+//Question.java
+//Hmwk3
 /**
  * Created by jeremybohannon on 10/4/17.
  */

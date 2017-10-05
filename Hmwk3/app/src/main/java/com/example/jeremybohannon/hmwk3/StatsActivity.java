@@ -7,7 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
+//Jeremy Bohannon Elizabeth Thompson
+//StatsActivity.java
+//Hmwk3
 public class StatsActivity extends AppCompatActivity {
 
     TextView percentageViewStats, tryAgainView;
@@ -22,7 +24,7 @@ public class StatsActivity extends AppCompatActivity {
         tryAgainView = (TextView) findViewById(R.id.tryAgainView);
         tryAgainView.setText(R.string.tryAgain);
         int correctAnswers = 0;
-        double totalQuestions = 15.0;
+        double totalQuestions = 16.0;
         double percentCorrect;
 
         if (getIntent() != null && getIntent().getExtras() != null) {

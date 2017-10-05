@@ -14,7 +14,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-
+//Jeremy Bohannon Elizabeth Thompson
+//MainAcitivity.java
+//Hmwk3
 public class MainActivity extends AppCompatActivity {
 
     ProgressBar progressBar;

@@ -8,6 +8,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+//Jeremy Bohannon Elizabeth Thompson
+//AsyncQuestion.java
+//Hmwk3
+
 public class AsyncQuestion extends AsyncTask<String, Void, String> {
     MainActivity activity;
 
