@@ -5,4 +5,8 @@
     <string name="statusDone">Trivia Ready</string>
     <string name="exit">Exit</string>
     <string name="startTrivia">Start Trivia</string>
+    <string name="triviaStats">Trvia Stats</string>
+    <string name="correctAnswers">Correct Answers</string>
+    <string name="tryAgain">Try again and see if you can get all the correct answers!</string>
+    <string name="tryAgainBtn">Try Again</string>
 </resources>

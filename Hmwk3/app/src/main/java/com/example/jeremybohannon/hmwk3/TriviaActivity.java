@@ -42,7 +42,7 @@ public class TriviaActivity extends AppCompatActivity {
         answerChoiceGroup = (RadioGroup) findViewById(R.id.answerChoices);
         answerChoiceGroup.setOnCheckedChangeListener(answerChoiceChange);
 
-        quitBtn = (Button) findViewById(R.id.quitBtn);
+        quitBtn = (Button) findViewById(R.id.exitBtn);
         nextBtn = (Button) findViewById(R.id.nextBtn);
 
         quitBtn.setOnClickListener(quitOnClick);
