@@ -1,5 +1,6 @@
 package com.example.jeremybohannon.hmwk3;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.annotation.IdRes;
@@ -42,7 +43,7 @@ public class TriviaActivity extends AppCompatActivity {
         answerChoiceGroup = (RadioGroup) findViewById(R.id.answerChoices);
         answerChoiceGroup.setOnCheckedChangeListener(answerChoiceChange);
 
-        quitBtn = (Button) findViewById(R.id.exitBtn);
+        quitBtn = (Button) findViewById(R.id.quitBtn);
         nextBtn = (Button) findViewById(R.id.nextBtn);
 
         quitBtn.setOnClickListener(quitOnClick);
@@ -112,14 +113,18 @@ public class TriviaActivity extends AppCompatActivity {
     View.OnClickListener nextOnClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            if (questionIndex == userAnswers.size() - 1) {
-                questionIndex++;
-
-                if (questionIndex < questionList.size()) {
-                    loadQuestionData(questionIndex);
-                }
-            } else {
+            if (questionIndex == userAnswers.size()) {
                 Toast.makeText(TriviaActivity.this, "Please select an answer choice.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (questionIndex != questionList.size() - 1) {
+                questionIndex++;
+                loadQuestionData(questionIndex);
+            } else {
+                Intent intent = new Intent(TriviaActivity.this, StatsActivity.class);
+                intent.putExtra("USER_ANSWERS", userAnswers);
+                startActivity(intent);
             }
         }
     };
