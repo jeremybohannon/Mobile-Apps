@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
         startBtn = (Button) findViewById(R.id.startBtn);
         exitBtn = (Button) findViewById(R.id.exitBtn);
         exitBtn.setOnClickListener(exitBtnListener);
+        startBtn.setOnClickListener(startBtnListern);
+
 
         if(isConnected()) {
             new AsyncQuestion(this).execute("http://dev.theappsdr.com/apis/trivia_json/trivia_text.php");
@@ -43,7 +45,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    Button.OnClickListener exitBtnListener = new View.OnClickListener() {
+    Button.OnClickListener startBtnListern = new Button.OnClickListener(){
+        @Override
+        public void onClick(View view) {
+            startTriviaIntent();
+        }
+    };
+
+    Button.OnClickListener exitBtnListener = new Button.OnClickListener() {
         @Override
         public void onClick(View view) {
             android.os.Process.killProcess(android.os.Process.myPid());
@@ -52,11 +61,6 @@ public class MainActivity extends AppCompatActivity {
     };
 
     public void setQuestions(String questions){
-        progressBar.setVisibility(View.GONE);
-        triviaImage.setVisibility(View.VISIBLE);
-        statusView.setText(R.string.statusDone);
-        startBtn.setEnabled(true);
-
         String[] questionsArr = questions.split("\n");
 
         for (int i = 0; i <= questionsArr.length - 1; i++) {
@@ -72,7 +76,10 @@ public class MainActivity extends AppCompatActivity {
             questionList.add(new Question(triviaQuestion, triviaPhoto, answerChoices, answerIndex));
         }
 
-        startTriviaIntent();
+        progressBar.setVisibility(View.GONE);
+        triviaImage.setVisibility(View.VISIBLE);
+        statusView.setText(R.string.statusDone);
+        startBtn.setEnabled(true);
     }
 
     public void startTriviaIntent(){
