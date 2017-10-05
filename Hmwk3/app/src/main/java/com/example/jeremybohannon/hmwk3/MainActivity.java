@@ -68,9 +68,7 @@ public class MainActivity extends AppCompatActivity {
             String triviaQuestion = question[1];
             String triviaPhoto = question[2];
             String[] answerChoices = new String[question.length -2];
-            for(int j = 3; j < question.length - 1; j++){
-                answerChoices[j - 3] = question[j];
-            }
+            System.arraycopy(question, 3, answerChoices, 0, question.length - 1 - 3);
             int answerIndex = Integer.parseInt(question[question.length - 1]);
 
             questionList.add(new Question(triviaQuestion, triviaPhoto, answerChoices, answerIndex));
