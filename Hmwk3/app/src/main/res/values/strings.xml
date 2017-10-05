@@ -11,4 +11,8 @@
     <string name="tryAgainBtn">Try Again</string>
     <string name="timeLeft">Time Left: 120 seconds</string>
     <string name="percentCorrect">%</string>
+    <string name="q1">Q1</string>
+    <string name="questionText">Question text goes here...</string>
+    <string name="quitBtn">Quit</string>
+    <string name="nextBtn">Next</string>
 </resources>
