@@ -16,8 +16,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -28,7 +31,8 @@ import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
     AutoCompleteTextView keyword;
-    private static String[] KEYWORDS = new String[] {};
+    private static String[] KEYWORDS = new String[]{};
+    private static String[] IMAGES = new String[]{};
 
     ProgressDialog progress;
     Button goBtn;
@@ -36,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
     String currentKeyword;
     int keywordsAmount = 0;
     int currentKeywordIndex = 0;
-    String[] requests = {};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +51,10 @@ public class MainActivity extends AppCompatActivity {
         keyword = (AutoCompleteTextView) findViewById(R.id.keyword);
         keyword.setEnabled(false);
 
-        if(isConnected()){
-            new Connection(false).execute("http://dev.theappsdr.com/apis/photos/keywords.php");
+        if (isConnected()) {
+            progress.setTitle("Loading...");
+            progress.show();
+            new Connection(false).execute("http://dev.theappsdr.com/apis/photos/keywords.php?type=json");
         } else {
             goBtn.setEnabled(false);
             Toast.makeText(MainActivity.this, "No internet connection", Toast.LENGTH_SHORT).show();
@@ -68,13 +73,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 progress.setTitle("Loading images...");
                 progress.show();
-                if(currentKeywordIndex > 0){
+                if (currentKeywordIndex > 0) {
                     currentKeywordIndex--;
-                    new GetImageAsync(photo).execute(requests[currentKeywordIndex]);
-                }
-                if(currentKeywordIndex == 0){
+                    new GetImageAsync(photo).execute(IMAGES[currentKeywordIndex]);
+                } else if (currentKeywordIndex == 0) {
                     currentKeywordIndex = keywordsAmount;
-                    new GetImageAsync(photo).execute(requests[currentKeywordIndex]);
+                    new GetImageAsync(photo).execute(IMAGES[currentKeywordIndex]);
                 }
             }
         });
@@ -84,13 +88,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 progress.setTitle("Loading images...");
                 progress.show();
-                if(currentKeywordIndex < keywordsAmount){
+                System.out.println(currentKeywordIndex);
+                if (currentKeywordIndex < keywordsAmount) {
                     currentKeywordIndex++;
-                    new GetImageAsync(photo).execute(requests[currentKeywordIndex]);
-                }
-                if(currentKeywordIndex == keywordsAmount){
+                    new GetImageAsync(photo).execute(IMAGES[currentKeywordIndex]);
+                } else if (currentKeywordIndex == keywordsAmount) {
                     currentKeywordIndex = 0;
-                    new GetImageAsync(photo).execute(requests[currentKeywordIndex]);
+                    new GetImageAsync(photo).execute(IMAGES[currentKeywordIndex]);
                 }
             }
         });
@@ -111,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
                 progress.show();
                 prevBtn.setEnabled(false);
                 nextBtn.setEnabled(false);
-                new Connection(true).execute("http://dev.theappsdr.com/apis/photos/index.php?keyword=" + currentKeyword);
+                new Connection(true).execute("http://dev.theappsdr.com/apis/photos/index.php?type=json&keyword=" + currentKeyword);
             }
         });
 
@@ -133,9 +137,11 @@ public class MainActivity extends AppCompatActivity {
 
     private class Connection extends AsyncTask<String, Void, String> {
         Boolean isImageRequest;
-        Connection(Boolean isImageRequest){
+
+        Connection(Boolean isImageRequest) {
             this.isImageRequest = isImageRequest;
         }
+
         @Override
         protected String doInBackground(String... strings) {
             StringBuilder stringBuilder = new StringBuilder();
@@ -150,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
                     reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                     String line = "";
                     while ((line = reader.readLine()) != null) {
-                        stringBuilder.append(line + "\n");
+                        stringBuilder.append(line);
                     }
                     result = stringBuilder.toString();
                 }
@@ -158,16 +164,6 @@ public class MainActivity extends AppCompatActivity {
                 //Handle the exceptions
             } finally {
                 //Close open connections and reader
-                if (connection != null) {
-                    connection.disconnect();
-                }
-                if (reader != null) {
-                    try {
-                        reader.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
             }
 
             return result;
@@ -175,20 +171,35 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(String result){
+        protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-            if(isImageRequest){
-                requests = result.split("\n");
-                keywordsAmount = requests.length -1;
+            if (isImageRequest) {
+                System.out.println("\n\n\n\n Result: " + result);
+
+                try {
+                    JSONObject root = null;
+                    root = new JSONObject(result);
+                    JSONArray images = root.getJSONArray("urls");
+
+                    IMAGES = new String[images.length()];
+                    for (int i = 0; i < images.length(); i++) {
+                        IMAGES[i] = images.get(i).toString();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                keywordsAmount = IMAGES.length - 1;
                 currentKeywordIndex = 0;
-                if(result.length() == 0){
+                if (result.length() == 0) {
                     photo.setImageResource(R.drawable.picture);
                     Toast.makeText(MainActivity.this, "No images found", Toast.LENGTH_SHORT).show();
                     progress.cancel();
                 } else {
-                    new GetImageAsync(photo).execute(requests[currentKeywordIndex]);
-                    if(keywordsAmount == 1){
+                    new GetImageAsync(photo).execute(IMAGES[currentKeywordIndex]);
+                    if (keywordsAmount == 1) {
                         nextBtn.setEnabled(false);
                         prevBtn.setEnabled(false);
                     } else {
@@ -198,10 +209,25 @@ public class MainActivity extends AppCompatActivity {
                 }
             } else {
                 // setup the autocomplete for keyword search
-                KEYWORDS = result.split(";");
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_dropdown_item_1line, KEYWORDS);
-                keyword.setAdapter(adapter);
-                keyword.setEnabled(true);
+                try {
+                    JSONObject root = null;
+                    root = new JSONObject(result);
+                    JSONArray keywords = root.getJSONArray("categories");
+
+                    KEYWORDS = new String[keywords.length()];
+                    for (int i = 0; i < keywords.length(); i++) {
+                        KEYWORDS[i] = keywords.get(i).toString();
+                    }
+
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_dropdown_item_1line, KEYWORDS);
+                    keyword.setAdapter(adapter);
+                    keyword.setEnabled(true);
+
+                    progress.cancel();
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -216,7 +242,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(String... params) {
-            HttpURLConnection connection = null;
+            HttpURLConnection connection;
             bitmap = null;
             try {
                 System.out.println("\n\n\n\n\n\n response: \t\t\t" + params[0]);
@@ -239,10 +265,10 @@ public class MainActivity extends AppCompatActivity {
             progress.cancel();
             if (bitmap != null && imageView != null) {
                 imageView.setImageBitmap(bitmap);
+            } else {
+                Toast.makeText(MainActivity.this, "Error in loading image...", Toast.LENGTH_SHORT).show();
             }
         }
     }
-
-
 
 }
