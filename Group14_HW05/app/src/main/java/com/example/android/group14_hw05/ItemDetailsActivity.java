@@ -38,6 +38,8 @@ public class ItemDetailsActivity extends AppCompatActivity {
         titleView.setText(item.getTitle());
 
         String date = item.getUpdatedDate().substring(0, item.getUpdatedDate().indexOf('T'));
+        String time = item.getUpdatedDate().substring(item.getUpdatedDate().indexOf('T') + 1, item.getUpdatedDate().length());
+
         updatedDataView.setText(date);
 
         summaryView.setText(item.getSummary());

@@ -4,13 +4,20 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,14 +42,34 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void compare(){
+        Collections.sort(this.objects, new Comparator<DataObject>() {
+            @Override
+            public int compare(DataObject o1, DataObject o2) {
+                try {
+                    String date = o1.getReleaseDate().substring(0, o1.getReleaseDate().indexOf('T')).replace("-", "");
+                    String date2 = o2.getReleaseDate().substring(0, o2.getReleaseDate().indexOf('T')).replace("-", "");
+                    Log.d("Dates", "Date 1: " + date + " date2: " + date2);
+                    return date2.compareTo(date);
+                } catch (Exception e) {
+                    System.out.println(e);
+                    return -1;
+                }
+            }
+        });
+    }
+
     public void handleData(final ArrayList<DataObject> objects){
         lv = (ListView) findViewById(R.id.listView);
         editText = (EditText) findViewById(R.id.search);
         go = (Button) findViewById(R.id.go);
         clear = (Button) findViewById(R.id.clear);
 
+        this.objects = objects;
 
-        final CustomAdapter customAdapter = new CustomAdapter(this, R.layout.item_layout, objects);
+        compare();
+
+        final CustomAdapter customAdapter = new CustomAdapter(this, R.layout.item_layout, this.objects);
         lv.setAdapter(customAdapter);
 
         progressDialog.dismiss();
@@ -50,11 +77,9 @@ public class MainActivity extends AppCompatActivity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView adapterView, View view, int i, long l) {
-                int index = i;
+                Log.d("Release Date: ", objects.get(i).getReleaseDate());
 
                 DataObject object = objects.get(i);
-
-                System.out.println("Object: " + object.getTitle());
 
                 Intent intent = new Intent(MainActivity.this, ItemDetailsActivity.class);
                 intent.putExtra("Item_Data", object);
@@ -73,9 +98,6 @@ public class MainActivity extends AppCompatActivity {
                         tmp.setisHighlighted(true);
                         objects.remove(i);
                         objects.add(0, tmp);
-
-
-
                     }
                 }
                 customAdapter.notifyDataSetChanged();
@@ -88,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
                 for(DataObject object: objects){
                     object.setisHighlighted(false);
                 }
+                compare();
                 customAdapter.notifyDataSetChanged();
             }
         });
