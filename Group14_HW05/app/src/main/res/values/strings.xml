@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Group14_HW05</string>
+    <string name="btn_label_go">Go</string>
+    <string name="btn_label_clear">Clear</string>
+    <string name="label_title">Title</string>
+    <string name="label_updated">Updated on: </string>
+    <string name="label_date_default">00/00/0000</string>
+    <string name="label_summary">Summary</string>
+    <string name="label_lorem">Lorem ipsum dolor sit amet, ad vitae propriae appellantur mei. In equidem menandri erroribus per, no stet ullum nec. Vis in velit dolor omnium. Cu usu soluta facete liberavisse, ut illum impedit assueverit cum. No saperet tractatos referrentur est, postea audiam intellegat nam at. Te duo soleat assentior, sit habeo animal ea. Prima vocibus lucilius mea no.</string>
 </resources>

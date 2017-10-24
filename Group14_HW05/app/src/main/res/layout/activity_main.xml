@@ -6,13 +6,64 @@
     android:layout_height="match_parent"
     tools:context="com.example.android.group14_hw05.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="19dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="11dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/search"
+        tools:layout_constraintBottom_creator="1"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintTop_creator="1" />
+
+    <EditText
+        android:id="@+id/search"
+        android:layout_width="179dp"
+        android:layout_height="48dp"
+        android:ems="10"
+        android:hint="Search by title . . ."
+        android:inputType="textPersonName"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="16dp" />
+
+    <Button
+        android:id="@+id/go"
+        android:layout_width="73dp"
+        android:layout_height="48dp"
+        android:layout_marginLeft="11dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/btn_label_go"
+        app:layout_constraintLeft_toRightOf="@+id/search"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_constraintTop_creator="1" />
+
+    <Button
+        android:id="@+id/clear"
+        android:layout_width="81dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/btn_label_clear"
+        app:layout_constraintBaseline_toBaselineOf="@+id/go"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toRightOf="@+id/go"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_constraintBaseline_creator="1"
+        tools:layout_editor_absoluteX="287dp" />
 
 </android.support.constraint.ConstraintLayout>
