@@ -9,6 +9,7 @@ public class DataObject implements Serializable {
     String summary;
     String smallImageURL;
     String largeImageURL;
+    Boolean isHighlighted = false;
 
     public DataObject() {
         this.updatedDate = "";
@@ -74,6 +75,14 @@ public class DataObject implements Serializable {
 
     public void setLargeImageURL(String largeImageURL) {
         this.largeImageURL = largeImageURL;
+    }
+
+    public boolean getisHighlighted(){
+        return this.isHighlighted;
+    }
+
+    public void setisHighlighted(boolean isHighlighted){
+        this.isHighlighted = isHighlighted;
     }
 
     @Override

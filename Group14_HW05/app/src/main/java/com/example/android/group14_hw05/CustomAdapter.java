@@ -45,6 +45,12 @@ public class CustomAdapter extends ArrayAdapter<DataObject> {
         viewHolder.title.setText(object.getTitle());
         Picasso.with(this.getContext()).load(object.getSmallImageURL()).into(viewHolder.image);
 
+        if(object.getisHighlighted()){
+            view.setBackgroundResource(R.color.highlight);
+        } else {
+            view.setBackgroundResource(R.color.deafult);
+        }
+
         return view;
     }
 
