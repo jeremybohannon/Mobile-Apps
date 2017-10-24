@@ -1,9 +1,5 @@
 package com.example.android.group14_hw05;
 
-/**
- * Created by jeremybohannon on 10/15/17.
- */
-
 public class DataObject {
     String updatedDate;
     String releaseDate;
@@ -11,6 +7,15 @@ public class DataObject {
     String summary;
     String smallImageURL;
     String largeImageURL;
+
+    public DataObject() {
+        this.updatedDate = "";
+        this.releaseDate = "";
+        this.title = "";
+        this.summary = "";
+        this.smallImageURL = "";
+        this.largeImageURL = "";
+    }
 
     public DataObject(String updatedDate, String releaseDate, String title, String summary, String smallImageURL, String largeImageURL) {
         this.updatedDate = updatedDate;
@@ -67,5 +72,17 @@ public class DataObject {
 
     public void setLargeImageURL(String largeImageURL) {
         this.largeImageURL = largeImageURL;
+    }
+
+    @Override
+    public String toString() {
+        return "DataObject{" +
+                "updatedDate='" + updatedDate + '\'' +
+                ", releaseDate='" + releaseDate + '\'' +
+                ", title='" + title + '\'' +
+                ", summary='" + summary + '\'' +
+                ", smallImageURL='" + smallImageURL + '\'' +
+                ", largeImageURL='" + largeImageURL + '\'' +
+                '}';
     }
 }

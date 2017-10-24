@@ -7,11 +7,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.util.List;
+import com.squareup.picasso.Picasso;
 
-/**
- * Created by jeremybohannon on 10/15/17.
- */
+import java.util.List;
 
 public class CustomAdapter extends ArrayAdapter<DataObject> {
 
@@ -45,11 +43,7 @@ public class CustomAdapter extends ArrayAdapter<DataObject> {
         DataObject object = getItem(position);
 
         viewHolder.title.setText(object.getTitle());
-
-
-
-//        viewHolder.image.setImageResource(object.);
-
+        Picasso.with(this.getContext()).load(object.getSmallImageURL()).into(viewHolder.image);
 
         return view;
     }
