@@ -31,14 +31,23 @@ public class ItemParser {
             while(event != XmlPullParser.END_DOCUMENT){
                 switch (event){
                     case XmlPullParser.START_TAG:
-                        System.out.println(parser.getName());
                             if(parser.getName().equals("entry")){
                                 hasPassed = true;
                                 item = new DataObject();
-                            } else if (parser.getName().equals("title") && hasPassed) {
-                                item.setTitle(parser.nextText().trim());
-                            } else if (parser.getName().equals("im:image") && hasPassed && Integer.parseInt(parser.getAttributeValue(null, "height")) == 55) {
-                                item.setSmallImageURL(parser.nextText().trim());
+                            } else if(hasPassed) {
+                                if (parser.getName().equals("title")) {
+                                    item.setTitle(parser.nextText().trim());
+                                } else if(parser.getName().equals("updated")){
+                                    item.setUpdatedDate(parser.nextText().trim());
+                                } else if(parser.getName().equals("summary")){
+                                    item.setSummary(parser.nextText().trim());
+                                } else if(parser.getName().equals("im:releaseDate")){
+                                    item.setReleaseDate(parser.nextText().trim());
+                                } else if (parser.getName().equals("im:image") && Integer.parseInt(parser.getAttributeValue(null, "height")) == 55) {
+                                    item.setSmallImageURL(parser.nextText().trim());
+                                } else if (parser.getName().equals("im:image") && Integer.parseInt(parser.getAttributeValue(null, "height")) == 170) {
+                                    item.setLargeImageURL(parser.nextText().trim());
+                                }
                             }
                         break;
                     case XmlPullParser.END_TAG:

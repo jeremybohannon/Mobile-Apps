@@ -1,6 +1,7 @@
 package com.example.android.group14_hw05;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -45,9 +46,11 @@ public class MainActivity extends AppCompatActivity {
 
                 DataObject object = objects.get(i);
 
-
                 System.out.println("Object: " + object.getTitle());
 
+                Intent intent = new Intent(MainActivity.this, ItemDetailsActivity.class);
+                intent.putExtra("Item_Data", object);
+                startActivity(intent);
             }
         });
     }

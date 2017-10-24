@@ -1,6 +1,8 @@
 package com.example.android.group14_hw05;
 
-public class DataObject {
+import java.io.Serializable;
+
+public class DataObject implements Serializable {
     String updatedDate;
     String releaseDate;
     String title;

@@ -31,7 +31,7 @@ public class CustomAdapter extends ArrayAdapter<DataObject> {
 
             viewHolder = new ViewHolder();
 
-            viewHolder.title = (TextView) view.findViewById(R.id.title);
+            viewHolder.title = view.findViewById(R.id.title);
             viewHolder.image = view.findViewById(R.id.image);
 
             view.setTag(viewHolder);
