@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     String date = o1.getReleaseDate().substring(0, o1.getReleaseDate().indexOf('T')).replace("-", "");
                     String date2 = o2.getReleaseDate().substring(0, o2.getReleaseDate().indexOf('T')).replace("-", "");
-                    Log.d("Dates", "Date 1: " + date + " date2: " + date2);
                     return date2.compareTo(date);
                 } catch (Exception e) {
                     System.out.println(e);
@@ -77,8 +76,6 @@ public class MainActivity extends AppCompatActivity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView adapterView, View view, int i, long l) {
-                Log.d("Release Date: ", objects.get(i).getReleaseDate());
-
                 DataObject object = objects.get(i);
 
                 Intent intent = new Intent(MainActivity.this, ItemDetailsActivity.class);

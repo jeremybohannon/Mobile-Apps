@@ -37,8 +37,6 @@ public class GetDataXML extends AsyncTask<String, Void, ArrayList<DataObject>> {
     protected void onPostExecute(ArrayList<DataObject> result) {
         super.onPostExecute(result);
 
-        System.out.println("GOT RESULT: " + result);
-
         this.activity.handleData(result);
     }
 }
