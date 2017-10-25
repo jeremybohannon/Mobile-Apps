@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
+import java.util.Date;
 
 public class ItemDetailsActivity extends AppCompatActivity {
 
@@ -37,10 +38,22 @@ public class ItemDetailsActivity extends AppCompatActivity {
 
         titleView.setText(item.getTitle());
 
-        String date = item.getUpdatedDate().substring(0, item.getUpdatedDate().indexOf('T'));
-        String time = item.getUpdatedDate().substring(item.getUpdatedDate().indexOf('T') + 1, item.getUpdatedDate().length());
+        Date newDate = null;
+        String formatDate = "";
+        int hour = 0;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            try {
+                newDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm").parse(item.getUpdatedDate());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            formatDate = new SimpleDateFormat("MM/dd/yyyy HH:mm").format(newDate);
+            hour = Integer.parseInt(new SimpleDateFormat("HH").format(newDate));
+        }
 
-        updatedDataView.setText(date);
+
+        formatDate += hour < 12 ? " AM" : " PM";
+        updatedDataView.setText(formatDate);
 
         summaryView.setText(item.getSummary());
 
