@@ -13,7 +13,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-
+//Jeremy Bohannon Elizabeth Thompson
+//Homework 5
+// ItemParser.java
 public class ItemParser {
     public static class ItemsPullParser{
         static public ArrayList<DataObject> parseItems(InputStream inputStream) throws XmlPullParserException, IOException{
@@ -26,15 +28,13 @@ public class ItemParser {
             parser.setInput(inputStream, "UTF-8");
 
             int event = parser.getEventType();
-            boolean hasPassed = false;
 
             while(event != XmlPullParser.END_DOCUMENT){
                 switch (event){
                     case XmlPullParser.START_TAG:
                             if(parser.getName().equals("entry")){
-                                hasPassed = true;
                                 item = new DataObject();
-                            } else if(hasPassed) {
+                            } else if(item != null) {
                                 if (parser.getName().equals("title")) {
                                     item.setTitle(parser.nextText().trim());
                                 } else if(parser.getName().equals("updated")){

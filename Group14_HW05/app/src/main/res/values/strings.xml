@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Group14_HW05</string>
+    <string name="app_name">iTunes Top Podcasts</string>
     <string name="btn_label_go">Go</string>
     <string name="btn_label_clear">Clear</string>
     <string name="label_title">Title</string>

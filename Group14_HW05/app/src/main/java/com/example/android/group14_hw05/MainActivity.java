@@ -19,6 +19,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Locale;
 
+//Jeremy Bohannon Elizabeth Thompson
+//Homework 5
+// MainActivity.java
 public class MainActivity extends AppCompatActivity {
 
     ListView lv;

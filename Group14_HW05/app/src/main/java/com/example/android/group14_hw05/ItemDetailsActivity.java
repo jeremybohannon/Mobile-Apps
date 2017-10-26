@@ -13,7 +13,9 @@ import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
 import java.util.Date;
-
+//Jeremy Bohannon Elizabeth Thompson
+//Homework 5
+// ItemDetailsActivity.java
 public class ItemDetailsActivity extends AppCompatActivity {
 
     TextView titleView, updatedDataView, summaryView;

@@ -5,7 +5,9 @@ import android.os.AsyncTask;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-
+//Jeremy Bohannon Elizabeth Thompson
+//Homework 5
+// MainAGetDataXMLctivity.java
 public class GetDataXML extends AsyncTask<String, Void, ArrayList<DataObject>> {
     private MainActivity activity;
 

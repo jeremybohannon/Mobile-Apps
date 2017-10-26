@@ -1,7 +1,9 @@
 package com.example.android.group14_hw05;
 
 import java.io.Serializable;
-
+//Jeremy Bohannon Elizabeth Thompson
+//Homework 5
+// DataObject.java
 public class DataObject implements Serializable {
     String updatedDate;
     String releaseDate;

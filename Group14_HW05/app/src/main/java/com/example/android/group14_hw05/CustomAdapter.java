@@ -10,7 +10,9 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
-
+//Jeremy Bohannon Elizabeth Thompson
+//Homework 5
+// CustomAdapter.java
 public class CustomAdapter extends ArrayAdapter<DataObject> {
 
     private List<DataObject> objects;
