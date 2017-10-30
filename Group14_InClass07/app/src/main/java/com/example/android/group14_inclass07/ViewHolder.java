@@ -1,6 +1,7 @@
 package com.example.android.group14_inclass07;
 
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 /**
@@ -9,6 +10,8 @@ import android.widget.TextView;
 
 class ViewHolder {
     TextView name;
-    TextView price;
-    ImageView picture;
+    TextView email;
+    TextView phone;
+    TextView department;
+    ImageView avatar;
 }
