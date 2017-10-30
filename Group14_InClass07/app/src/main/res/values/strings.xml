@@ -3,7 +3,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <string name="label_name">Hello blank fragment</string>
     <string name="radio_dept_sis">SIS</string>
     <string name="radio_dept_cs">CS</string>
     <string name="radio_dept_bio">BIO</string>
@@ -11,4 +11,8 @@
     <string name="btn_label_submit">Submit</string>
     <string name="selectAvatar">Select your Avatar</string>
     <string name="label_current_mood_result">I am</string>
+    <string name="label_email">test</string>
+    <string name="label_department">test</string>
+    <string name="label_current_mood_value_happy">test</string>
+    <string name="label_current_mood">test</string>
 </resources>
