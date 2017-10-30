@@ -11,4 +11,12 @@
     <string name="btn_label_submit">Submit</string>
     <string name="selectAvatar">Select your Avatar</string>
     <string name="label_current_mood_result">I am</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_phone">Phone</string>
+    <string name="label_department">Department</string>
+    <string name="label_sis">SIS</string>
+    <string name="label_cs">CS</string>
+    <string name="label_bio">BIO</string>
+    <string name="label_submit">Submit</string>
 </resources>
