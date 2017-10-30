@@ -20,4 +20,5 @@
     <string name="label_cs">CS</string>
     <string name="label_bio">BIO</string>
     <string name="label_submit">Submit</string>
+    <string name="label_createnew">Create New Contact</string>
 </resources>
