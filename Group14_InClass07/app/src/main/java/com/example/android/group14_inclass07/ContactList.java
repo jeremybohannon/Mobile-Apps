@@ -71,24 +71,24 @@ public class ContactList extends Fragment {
             final CustomAdapter customAdapter = new CustomAdapter(getActivity(), R.layout.fragment_contact_list, contacts);
             lv.setAdapter(customAdapter);
 
-            lv.setOnLongClickListener();
-
-
-            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView adapterView, View view, int i, long l) {
-                    int index = i;
-
-                    DataObject object = objects.get(i);
-
-
-                    System.out.println("Object: " + object.getName());
-
-                    objects.remove(i);
-
-                    customAdapter.notifyDataSetChanged();
-                }
-            });
+//            lv.setOnLongClickListener();
+//
+//
+//            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                @Override
+//                public void onItemClick(AdapterView adapterView, View view, int i, long l) {
+//                    int index = i;
+//
+//                    DataObject object = objects.get(i);
+//
+//
+//                    System.out.println("Object: " + object.getName());
+//
+//                    objects.remove(i);
+//
+//                    customAdapter.notifyDataSetChanged();
+//                }
+//            });
         }
 
         getActivity().findViewById(R.id.newContactBtn).setOnClickListener(new View.OnClickListener() {

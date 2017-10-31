@@ -1,5 +1,6 @@
 package com.example.android.group14_inclass07;
 
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,7 +10,8 @@ import android.widget.Button;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements ContactList.OnFragmentInteractionListener, CreateNewContact.OnFragmentInteractionListener, SelectAvatar.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements ContactList.OnFragmentInteractionListener,
+        CreateNewContact.OnFragmentInteractionListener, SelectAvatar.OnFragmentInteractionListener {
 
     ArrayList<Contact> contacts = new ArrayList<>();
 
@@ -52,6 +54,15 @@ public class MainActivity extends AppCompatActivity implements ContactList.OnFra
 
     @Override
     public void onSelectFragmentInteraction() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, new CreateNewContact(), "createNewContact")
+                .commit();
+    }
 
+    @Override
+    public void onSelectFragmentInteraction(String image) {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, CreateNewContact.newInstance(image), "createNewContact")
+                .commit();
     }
 }

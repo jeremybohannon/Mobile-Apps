@@ -1,14 +1,17 @@
 package com.example.android.group14_inclass07;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 
 /**
@@ -73,13 +76,52 @@ public class SelectAvatar extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        getActivity().findViewById(R.id.newContactBtn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        getActivity().findViewById(R.id.f1).setOnClickListener(onImageClick);
+        getActivity().findViewById(R.id.f2).setOnClickListener(onImageClick);
+        getActivity().findViewById(R.id.f3).setOnClickListener(onImageClick);
+        getActivity().findViewById(R.id.m1).setOnClickListener(onImageClick);
+        getActivity().findViewById(R.id.m2).setOnClickListener(onImageClick);
+        getActivity().findViewById(R.id.m3).setOnClickListener(onImageClick);
 
-            }
-        });
+//        getActivity().findViewById(R.id.newContactBtn).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//            }
+//        });
     }
+
+    View.OnClickListener onImageClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Log.d("Debug", "onClick: " + view.getId());
+            String image = "";
+            ImageView avatar = (ImageView) view;
+
+            switch (view.getId()) {
+                case R.id.f1:
+                    image = "f1";
+                    break;
+                case R.id.f2:
+                    image = "f2";
+                    break;
+                case R.id.f3:
+                    image = "f3";
+                    break;
+                case R.id.m1:
+                    image = "m1";
+                    break;
+                case R.id.m2:
+                    image = "m2";
+                    break;
+                case R.id.m3:
+                    image = "m3";
+                    break;
+            }
+
+            mListener.onSelectFragmentInteraction(image);
+        }
+    };
 
     @Override
     public void onAttach(Context context) {
@@ -109,7 +151,7 @@ public class SelectAvatar extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onSelectFragmentInteraction();
+        void onSelectFragmentInteraction(String image);
     }
 }
