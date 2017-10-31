@@ -50,6 +50,7 @@ public class CustomAdapter extends ArrayAdapter<Contact> {
         viewHolder.email.setText(object.getEmail());
         viewHolder.phone.setText(object.getPhone());
         viewHolder.department.setText(object.getDepartment());
+
         viewHolder.avatar.setImageResource(object.getImageid());
 
         return view;
