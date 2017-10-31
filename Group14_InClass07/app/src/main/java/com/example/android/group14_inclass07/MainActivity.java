@@ -32,6 +32,11 @@ public class MainActivity extends AppCompatActivity implements ContactList.OnFra
     }
 
     @Override
+    public void onListFragementInteraction(int index) {
+        contacts.remove(index);
+    }
+
+    @Override
     public void onCreateFragmentInteraction() {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, new SelectAvatar(), "selectAvatar")

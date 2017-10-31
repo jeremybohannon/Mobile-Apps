@@ -12,10 +12,13 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.R.id.list;
 
 
 /**
@@ -37,6 +40,8 @@ public class ContactList extends Fragment {
 
     ArrayList<Contact> contacts;
     private OnFragmentInteractionListener mListener;
+    ListView lv;
+    CustomAdapter customAdapter;
 
     public ContactList() {
         // Required empty public constructor
@@ -66,29 +71,13 @@ public class ContactList extends Fragment {
 
         if(contacts != null){
             Log.d("Debug", "OnActivityCreated: " + contacts.size());
-            ListView lv = getActivity().findViewById(R.id.contactView);
+            lv = getActivity().findViewById(R.id.contactView);
 
-            final CustomAdapter customAdapter = new CustomAdapter(getActivity(), R.layout.fragment_contact_list, contacts);
+            customAdapter = new CustomAdapter(getActivity(), R.layout.fragment_contact_list, contacts);
             lv.setAdapter(customAdapter);
+            lv.setLongClickable(true);
+            lv.setOnItemLongClickListener(longListener);
 
-            lv.setOnLongClickListener();
-
-
-            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView adapterView, View view, int i, long l) {
-                    int index = i;
-
-                    DataObject object = objects.get(i);
-
-
-                    System.out.println("Object: " + object.getName());
-
-                    objects.remove(i);
-
-                    customAdapter.notifyDataSetChanged();
-                }
-            });
         }
 
         getActivity().findViewById(R.id.newContactBtn).setOnClickListener(new View.OnClickListener() {
@@ -99,6 +88,16 @@ public class ContactList extends Fragment {
         });
 
     }
+
+    AdapterView.OnItemLongClickListener longListener = new AdapterView.OnItemLongClickListener() {
+        @Override
+        public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+            contacts.remove(i);
+            customAdapter.notifyDataSetChanged();
+
+            return false;
+        }
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -145,5 +144,6 @@ public class ContactList extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onListFragmentInteraction();
+        void onListFragementInteraction(int index);
     }
 }
