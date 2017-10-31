@@ -37,7 +37,7 @@ public class CustomAdapter extends ArrayAdapter<Contact> {
             viewHolder.email = (TextView) view.findViewById(R.id.email);
             viewHolder.phone = (TextView) view.findViewById(R.id.phone);
             viewHolder.department = (TextView) view.findViewById(R.id.department);
-            viewHolder.phone = view.findViewById(R.id.avatar);
+            viewHolder.avatar = view.findViewById(R.id.avatar);
 
             view.setTag(viewHolder);
         } else {
@@ -50,7 +50,7 @@ public class CustomAdapter extends ArrayAdapter<Contact> {
         viewHolder.email.setText(object.getEmail());
         viewHolder.phone.setText(object.getPhone());
         viewHolder.department.setText(object.getDepartment());
-        viewHolder.avatar.setImageResource(object.getImageid());
+//        viewHolder.avatar.setImageResource(object.getImageid());
 
         return view;
     }

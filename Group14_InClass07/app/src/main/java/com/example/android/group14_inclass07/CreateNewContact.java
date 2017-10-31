@@ -3,10 +3,14 @@ package com.example.android.group14_inclass07;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 
 /**
@@ -67,12 +71,35 @@ public class CreateNewContact extends Fragment {
         return inflater.inflate(R.layout.fragment_create_new_contact, container, false);
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        getActivity().findViewById(R.id.avatar).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.onCreateFragmentInteraction();
+            }
+        });
+
+        getActivity().findViewById(R.id.submitBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EditText name = (EditText) getActivity().findViewById(R.id.name);
+                EditText email = (EditText) getActivity().findViewById(R.id.email);
+                EditText phone = (EditText) getActivity().findViewById(R.id.phone);
+                RadioGroup grp = (RadioGroup) getActivity().findViewById(R.id.departmentGroup);
+
+                int id = grp.getCheckedRadioButtonId();
+                RadioButton dept = (RadioButton) getActivity().findViewById(id);
+
+                Contact contact = new Contact(name.getText().toString(), email.getText().toString(), phone.getText().toString(), dept.getText().toString(), 0);
+
+                mListener.onCreateFragmentInteraction(contact);
+            }
+        });
     }
+
 
     @Override
     public void onAttach(Context context) {
@@ -103,6 +130,7 @@ public class CreateNewContact extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onCreateFragmentInteraction();
+        void onCreateFragmentInteraction(Contact contact);
     }
 }

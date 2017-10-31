@@ -1,20 +1,23 @@
 package com.example.android.group14_inclass07;
 
+import java.io.Serializable;
+
 /**
  * Created by jeremybohannon on 10/30/17.
  */
 
-class Contact {
+class Contact implements Serializable{
     private String name;
     private String email;
     private String phone;
     private String department;
     private int imageid;
 
-    public Contact(String name, String email, String department, int imageid) {
+    public Contact(String name, String email, String phone, String department, int imageid) {
         this.name = name;
         this.email = email;
         this.department = department;
+        this.phone = phone;
         this.imageid = imageid;
     }
 

@@ -9,7 +9,7 @@ import android.widget.Button;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements ContactList.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements ContactList.OnFragmentInteractionListener, CreateNewContact.OnFragmentInteractionListener, SelectAvatar.OnFragmentInteractionListener {
 
     ArrayList<Contact> contacts = new ArrayList<>();
 
@@ -21,15 +21,37 @@ public class MainActivity extends AppCompatActivity implements ContactList.OnFra
         setContentView(R.layout.activity_main);
 
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.container, new ContactList(), "contactList")
+                .add(R.id.container, ContactList.newInstance(contacts), "contactList")
                 .commit();
+    }
 
+    public void onListFragmentInteraction() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, new CreateNewContact(), "createNewContact")
+                .commit();
+    }
 
+    @Override
+    public void onCreateFragmentInteraction() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, new SelectAvatar(), "selectAvatar")
+                .commit();
+    }
+
+    @Override
+    public void onCreateFragmentInteraction(Contact contact) {
+        contacts.add(contact);
+
+        System.out.println("NAME: " + contact.getName());
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, ContactList.newInstance(contacts), "contactList")
+                .commit();
     }
 
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
+    public void onSelectFragmentInteraction() {
 
     }
 }
