@@ -4,7 +4,9 @@ import java.io.Serializable;
 
 /**
  * Created by jeremybohannon on 10/30/17.
- */
+ *///Jeremy Bohannon Elizabeth Thompson
+//InClass07
+//contact.java
 
 class Contact implements Serializable{
     private String name;

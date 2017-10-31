@@ -24,6 +24,9 @@ import android.widget.RadioGroup;
  * Use the {@link CreateNewContact#newInstance} factory method to
  * create an instance of this fragment.
  */
+//Jeremy Bohannon Elizabeth Thompson
+//InClass07
+//createnewcontact.java
 public class CreateNewContact extends Fragment implements SelectAvatar.OnFragmentInteractionListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

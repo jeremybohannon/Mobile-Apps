@@ -19,7 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static android.R.id.list;
-
+//Jeremy Bohannon Elizabeth Thompson
+//InClass07
+//contactlist.java
 
 /**
  * A simple {@link Fragment} subclass.

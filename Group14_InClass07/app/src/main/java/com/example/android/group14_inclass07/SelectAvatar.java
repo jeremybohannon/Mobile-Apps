@@ -22,6 +22,9 @@ import android.widget.ImageView;
  * Use the {@link SelectAvatar#newInstance} factory method to
  * create an instance of this fragment.
  */
+//Jeremy Bohannon Elizabeth Thompson
+//InClass07
+//slectavatar.java
 public class SelectAvatar extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

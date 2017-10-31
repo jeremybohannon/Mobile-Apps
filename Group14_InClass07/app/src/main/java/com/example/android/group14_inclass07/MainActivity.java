@@ -9,7 +9,9 @@ import android.view.View;
 import android.widget.Button;
 
 import java.util.ArrayList;
-
+//Jeremy Bohannon Elizabeth Thompson
+//InClass07
+//Mainactivity.java
 public class MainActivity extends AppCompatActivity implements ContactList.OnFragmentInteractionListener,
         CreateNewContact.OnFragmentInteractionListener, SelectAvatar.OnFragmentInteractionListener {
 

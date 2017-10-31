@@ -7,7 +7,9 @@ import android.widget.TextView;
 /**
  * Created by jeremybohannon on 10/15/17.
  */
-
+//Jeremy Bohannon Elizabeth Thompson
+//InClass07
+//viewholder.java
 class ViewHolder {
     TextView name;
     TextView email;
