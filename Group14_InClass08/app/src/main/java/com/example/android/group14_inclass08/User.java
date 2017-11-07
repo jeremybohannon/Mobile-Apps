@@ -5,7 +5,7 @@ package com.example.android.group14_inclass08;
  */
 
 public class User {
-    String status, token, user_email, user_fname, user_lame, user_role;
+    String status, token, user_email, user_fname, user_lname, user_role;
     int user_id;
 
     @Override
@@ -15,7 +15,7 @@ public class User {
                 ", token='" + token + '\'' +
                 ", user_email='" + user_email + '\'' +
                 ", user_fname='" + user_fname + '\'' +
-                ", user_lame='" + user_lame + '\'' +
+                ", user_lame='" + user_lname + '\'' +
                 ", user_role='" + user_role + '\'' +
                 ", user_id=" + user_id +
                 '}';
