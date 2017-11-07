@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Group14_InClass08</string>
+    <string name="label_signup_link">Don\'t have an account? <u>Sign up</u>.</string>
+    <string name="button_label_login">Login</string>
+    <string name="label_email">Email</string>
+    <string name="label_password">Password</string>
 </resources>
