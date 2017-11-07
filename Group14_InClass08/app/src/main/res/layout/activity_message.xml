@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.android.group14_inclass08.ChatActivity">
+    tools:context="com.example.android.group14_inclass08.MessageActivity">
 
     <LinearLayout
         android:id="@+id/topBar"
@@ -31,9 +31,9 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/bottomBar"
-        android:layout_width="0dp"
-        android:layout_height="74dp"
+        android:id="@+id/chatListLayout"
+        android:layout_width="366dp"
+        android:layout_height="78dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
@@ -44,19 +44,29 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chatListLayout">
+        app:layout_constraintTop_toBottomOf="@+id/chatListLayout"
+        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0">
 
         <EditText
-            android:id="@+id/chatText"
-            android:layout_width="259dp"
-            android:layout_height="match_parent"
+            android:id="@+id/threadText"
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:ems="10"
-            android:hint="Enter Message"
-            android:inputType="textPersonName" />
+            android:hint="Add New Thread"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/chatListLayout"
+        android:id="@+id/listView"
         android:layout_width="368dp"
         android:layout_height="343dp"
         android:layout_marginEnd="8dp"
@@ -71,8 +81,10 @@
         app:layout_constraintTop_toBottomOf="@+id/topBar">
 
         <ListView
-            android:id="@+id/chatListLayout"
+            android:id="@+id/messageList"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
     </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>
