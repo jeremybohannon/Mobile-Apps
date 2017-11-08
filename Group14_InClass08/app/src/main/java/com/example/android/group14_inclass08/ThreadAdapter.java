@@ -38,7 +38,7 @@ public class ThreadAdapter extends ArrayAdapter<ThreadObject> {
 
         ThreadObject object = getItem(position);
 
-        viewHolder.thread.setText(object.getThread());
+        viewHolder.thread.setText(object.getTitle());
 
 
         return view;

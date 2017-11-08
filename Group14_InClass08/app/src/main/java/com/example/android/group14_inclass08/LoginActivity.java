@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -47,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
                 try {
                     login(email.getText().toString(), password.getText().toString());
                 } catch (Exception e) {
+                    Toast.makeText(LoginActivity.this, "Login Unsuccessful", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
             }
@@ -64,6 +66,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void login(String email, String password) throws Exception {
+        //TODO Change to dynamic
+        email = "user@test.com";
+        password = "test";
+
         RequestBody formBody = new FormBody.Builder()
                 .add("email", email)
                 .add("password", password)
@@ -83,10 +89,16 @@ public class LoginActivity extends AppCompatActivity {
                 try {
                     ResponseBody responseBody = response.body();
 
-                    if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+                    if (!response.isSuccessful()) {
+                        throw new IOException("Unexpected code " + response);
+                    }
 
                     Gson gson = new Gson();
                     User user = gson.fromJson(responseBody.string(), User.class);
+
+                    Intent intent = new Intent(LoginActivity.this, MessageActivity.class);
+                    intent.putExtra("User", user);
+                    startActivity(intent);
 
                     System.out.println(user.toString());
                 } catch (Exception e) {

@@ -8,7 +8,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class ChatActivity extends AppCompatActivity {
@@ -22,9 +21,11 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
-        threadView = (TextView) findViewById(R.id.threadView);
+        threadView = (TextView) findViewById(R.id.thread);
         chatText = (EditText) findViewById(R.id.chatText);
         chatList = (ListView) findViewById(R.id.chatList);
+
+
 
         final ArrayList<MessageObject> messages = new ArrayList<>();
 

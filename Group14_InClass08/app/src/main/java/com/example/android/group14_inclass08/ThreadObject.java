@@ -1,21 +1,24 @@
 package com.example.android.group14_inclass08;
 
-/**
- * Created by jeremybohannon on 10/15/17.
- */
-
 public class ThreadObject {
-    private String thread;
+    private String title;
 
-    public ThreadObject(String thread) {
-        this.thread = thread;
+    public ThreadObject(String title) {
+        this.title = title;
     }
 
-    public String getThread() {
-        return thread;
+    public String getTitle() {
+        return title;
     }
 
-    public void setThread(String thread) {
-        this.thread = thread;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    @Override
+    public String toString() {
+        return "ThreadObject{" +
+                "title='" + title + '\'' +
+                '}';
     }
 }
