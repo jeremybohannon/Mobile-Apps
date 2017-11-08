@@ -29,7 +29,7 @@ public class ChatActivity extends AppCompatActivity {
 
         final ArrayList<MessageObject> messages = new ArrayList<>();
 
-//        final MessageAdapter messageAdapter = new MessageAdapter(this, R.layout.message_view, MessageObject);
+//        final MessageAdapter messageAdapter = new MessageAdapter(this, R.layout.thread_view, MessageObject);
 //        chatList.setAdapter(messageAdapter);
 
         chatList.setOnItemClickListener(new AdapterView.OnItemClickListener() {

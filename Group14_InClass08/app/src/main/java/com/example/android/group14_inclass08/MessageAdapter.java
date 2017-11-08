@@ -9,13 +9,13 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class MessageAdapter extends ArrayAdapter<MessageObject> {
+public class MessageAdapter extends ArrayAdapter<ThreadObject> {
 
-    private List<MessageObject> objects;
+    private List<ThreadObject> threads;
 
-    public MessageAdapter(Context context, int resource, List<MessageObject> objects) {
-        super(context, resource, objects);
-        this.objects = objects;
+    public MessageAdapter(Context context, int resource, List<ThreadObject> threads) {
+        super(context, resource, threads);
+        this.threads = threads;
 
     }
 
@@ -25,7 +25,7 @@ public class MessageAdapter extends ArrayAdapter<MessageObject> {
         MessageViewHolder MessageViewHolder;
 
         if (view == null) {
-//            view = LayoutInflater.from(getContext()).inflate(R.layout.message_view, parent, false);
+//            view = LayoutInflater.from(getContext()).inflate(R.layout.blahmessage_view, parent, false);
 
             MessageViewHolder = new MessageViewHolder();
 
@@ -39,11 +39,11 @@ public class MessageAdapter extends ArrayAdapter<MessageObject> {
         }
 
 
-        MessageObject object = getItem(position);
+//        MessageObject object = getItem(position);
 
-        MessageViewHolder.message.setText(object.getMessage());
-        MessageViewHolder.name.setText(object.getName());
-        MessageViewHolder.time.setText(object.getTime());
+//        MessageViewHolder.message.setText(object.getMessage());
+//        MessageViewHolder.name.setText(object.getName());
+//        MessageViewHolder.time.setText(object.getTime());
 
 
         return view;

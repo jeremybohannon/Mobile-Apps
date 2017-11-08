@@ -1,6 +1,7 @@
 package com.example.android.group14_inclass08;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,6 +29,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     EditText firstname, lastname, email, password, repeatPassword;
     Button signUpBtn, cancelBtn;
+    public static final String MY_PREFS_NAME = "MyPrefsFile";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +108,9 @@ public class SignUpActivity extends AppCompatActivity {
 
                     Gson gson = new Gson();
                     User user = gson.fromJson(responseBody.string(), User.class);
+
+                    //TODO shared preferences
+
 
                     System.out.println(user.toString());
                 } catch (Exception e) {

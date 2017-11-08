@@ -1,15 +1,12 @@
 package com.example.android.group14_inclass08;
 
 import android.content.Intent;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -31,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText email, password;
     Button loginBtn, signupBtn;
+    public static final String MY_PREFS_NAME = "MyPrefsFile";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +94,13 @@ public class LoginActivity extends AppCompatActivity {
                     Gson gson = new Gson();
                     User user = gson.fromJson(responseBody.string(), User.class);
 
-                    Intent intent = new Intent(LoginActivity.this, MessageActivity.class);
+                    //Store token in SharedPreferences
+                    SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+                    editor.putString("userToken", user.getToken());
+                    editor.putInt("userID", user.getUser_id());
+                    editor.apply();
+
+                    Intent intent = new Intent(LoginActivity.this, ThreadActivity.class);
                     intent.putExtra("User", user);
                     startActivity(intent);
 
