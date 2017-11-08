@@ -1,15 +1,11 @@
 package com.example.android.group14_inclass08;
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-
-import com.google.gson.Gson;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -20,24 +16,22 @@ import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 
-import static android.content.Context.MODE_PRIVATE;
-
 
 public class ThreadAdapter extends ArrayAdapter<ThreadObject> {
     private final OkHttpClient client = new OkHttpClient();
 
     private List<ThreadObject> objects;
-    ThreadActivity activity;
-    public static final String MY_PREFS_NAME = "MyPrefsFile";
+    private ThreadActivity activity;
 
-    public ThreadAdapter(ThreadActivity activity, Context context, int resource, List<ThreadObject> objects) {
+    ThreadAdapter(ThreadActivity activity, Context context, int resource, List<ThreadObject> objects) {
         super(context, resource, objects);
         this.activity = activity;
         this.objects = objects;
     }
 
+    @NonNull
     @Override
-    public View getView(final int position, View view, ViewGroup parent) {
+    public View getView(final int position, View view, @NonNull ViewGroup parent) {
 
         ThreadViewHolder viewHolder;
 
@@ -46,7 +40,7 @@ public class ThreadAdapter extends ArrayAdapter<ThreadObject> {
 
             viewHolder = new ThreadViewHolder();
 
-            viewHolder.thread = view.findViewById(R.id.thread);
+            viewHolder.thread = view.findViewById(R.id.message);
             viewHolder.delete = view.findViewById(R.id.deleteBtn);
 
             view.setTag(viewHolder);
@@ -56,10 +50,8 @@ public class ThreadAdapter extends ArrayAdapter<ThreadObject> {
 
         final ThreadObject object = getItem(position);
 
+        assert object != null;
         viewHolder.thread.setText(object.getTitle());
-
-        System.out.println("OBJECT ID: " + object.getUser_id());
-        System.out.println("ACTIVITY ID " + activity.returnUserId());
 
         if(Integer.parseInt(object.getUser_id()) == activity.returnUserId()){
 
@@ -76,11 +68,11 @@ public class ThreadAdapter extends ArrayAdapter<ThreadObject> {
                             .build();
 
                     client.newCall(request).enqueue(new Callback() {
-                        @Override public void onFailure(Call call, IOException e) {
+                        @Override public void onFailure(@NonNull Call call, @NonNull IOException e) {
                             e.printStackTrace();
                         }
 
-                        @Override public void onResponse(Call call, Response response) throws IOException {
+                        @Override public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                             try {
                                 ResponseBody responseBody = response.body();
 
@@ -88,6 +80,7 @@ public class ThreadAdapter extends ArrayAdapter<ThreadObject> {
                                     throw new IOException("Unexpected code " + response);
                                 }
 
+                                assert responseBody != null;
                                 System.out.println("DELETE RESPONSE: " + responseBody.toString());
                                 objects.remove(getItem(position));
                                 activity.updateThread();

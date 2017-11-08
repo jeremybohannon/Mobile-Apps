@@ -1,6 +1,8 @@
 package com.example.android.group14_inclass08;
 
-public class ThreadObject {
+import java.io.Serializable;
+
+public class ThreadObject implements Serializable {
     private String title;
     private String user_id;
     private String id;

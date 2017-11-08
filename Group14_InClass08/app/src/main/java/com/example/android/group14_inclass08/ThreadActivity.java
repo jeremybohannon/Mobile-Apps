@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -42,9 +43,10 @@ public class ThreadActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-        nameView = (TextView) findViewById(R.id.nameView);
-        threadText = (EditText) findViewById(R.id.threadText);
+        nameView = (TextView) findViewById(R.id.threadView);
+        threadText = (EditText) findViewById(R.id.chatText);
         threadList = (ListView) findViewById(R.id.chatList);
         logoutBtn = (ImageView) findViewById(R.id.logoutBtn);
         addBtn = (ImageView) findViewById(R.id.addBtn);
@@ -81,6 +83,7 @@ public class ThreadActivity extends AppCompatActivity {
     }
 
     public void getThreads(){
+        //TODO get from shared pref
         Request request = new Request.Builder()
                 .url("http://ec2-54-164-74-55.compute-1.amazonaws.com/api/thread")
                 .header("Authorization", "BEARER " + user.getToken())
@@ -127,6 +130,9 @@ public class ThreadActivity extends AppCompatActivity {
                         ThreadObject object = threads.get(i);
 
                         System.out.println("Object: " + object.getTitle());
+                        Intent intent = new Intent(ThreadActivity.this, ChatActivity.class);
+                        intent.putExtra("Thread", object);
+                        startActivity(intent);
                     }
                 });
             }

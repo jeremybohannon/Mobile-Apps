@@ -5,6 +5,7 @@ import android.widget.TextView;
 
 class MessageViewHolder {
     TextView message;
-    TextView name;
-    TextView time;
+    TextView user;
+    TextView date;
+    ImageView delete;
 }

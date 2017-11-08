@@ -6,13 +6,19 @@ package com.example.android.group14_inclass08;
 
 public class MessageObject {
     private String message;
-    private String name;
-    private String time;
+    private String user_fname;
+    private String user_lname;
+    private String user_id;
+    private String id;
+    private String created_at;
 
-    public MessageObject(String message, String name, String time) {
+    public MessageObject(String message, String user_fname, String user_lname, String user_id, String id, String created_at) {
         this.message = message;
-        this.name = name;
-        this.time = time;
+        this.user_fname = user_fname;
+        this.user_lname = user_lname;
+        this.user_id = user_id;
+        this.id = id;
+        this.created_at = created_at;
     }
 
     public String getMessage() {
@@ -23,19 +29,55 @@ public class MessageObject {
         this.message = message;
     }
 
-    public String getName() {
-        return name;
+    public String getUser_fname() {
+        return user_fname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUser_fname(String user_fname) {
+        this.user_fname = user_fname;
     }
 
-    public String getTime() {
-        return time;
+    public String getUser_lname() {
+        return user_lname;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setUser_lname(String user_lname) {
+        this.user_lname = user_lname;
+    }
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
+    }
+
+    @Override
+    public String toString() {
+        return "MessageObject{" +
+                "message='" + message + '\'' +
+                ", user_fname='" + user_fname + '\'' +
+                ", user_lname='" + user_lname + '\'' +
+                ", user_id='" + user_id + '\'' +
+                ", id='" + id + '\'' +
+                ", created_at='" + created_at + '\'' +
+                '}';
     }
 }
