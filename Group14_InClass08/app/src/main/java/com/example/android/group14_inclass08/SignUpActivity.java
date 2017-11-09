@@ -88,7 +88,7 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
 
-    public void signup(String firstname, String lastname, String email, String password) throws Exception {
+    public void signup(String firstname, String lastname, String email, final String password) throws Exception {
         RequestBody formBody = new FormBody.Builder()
                 .add("fname", firstname)
                 .add("lname", lastname)
@@ -118,20 +118,16 @@ public class SignUpActivity extends AppCompatActivity {
                     SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
                     editor.putString("userToken", user.getToken());
                     editor.putInt("userId", user.getUser_id());
+                    editor.putString("userEmail", user.getUser_email());
+                    editor.putString("password", password);
                     editor.apply();
 
                     runOnUiThread(new Runnable() {
                         public void run() {
                             Toast.makeText(SignUpActivity.this, "User " + user.getUser_fname() + " " + user.getUser_lname() + " created.", Toast.LENGTH_SHORT).show();
-
                         }
                     });
 
-                    //TODO get the return to work
-                    System.out.println("Returning to login......");
-                    Intent returnIntent = new Intent();
-                    returnIntent.putExtra("User", user);
-                    setResult(LoginActivity.RESULT_OK, returnIntent);
                     finish();
                 } catch (Exception e) {
                     e.printStackTrace();

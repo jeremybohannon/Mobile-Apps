@@ -33,6 +33,7 @@ public class ThreadActivity extends AppCompatActivity {
     ListView threadList;
     ImageView logoutBtn, addBtn;
     User user;
+    String userToken;
     static ThreadAdapter threadAdapter;
 
     private final OkHttpClient client = new OkHttpClient();
@@ -53,6 +54,9 @@ public class ThreadActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         user = (User) intent.getSerializableExtra("User");
+
+        SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+        userToken = prefs.getString("userToken", "");
 
         nameView.setText(user.getUser_fname() + " " + user.getUser_lname());
 
@@ -86,7 +90,7 @@ public class ThreadActivity extends AppCompatActivity {
         //TODO get from shared pref
         Request request = new Request.Builder()
                 .url("http://ec2-54-164-74-55.compute-1.amazonaws.com/api/thread")
-                .header("Authorization", "BEARER " + user.getToken())
+                .header("Authorization", "BEARER " + userToken)
                 .build();
 
         client.newCall(request).enqueue(new Callback() {

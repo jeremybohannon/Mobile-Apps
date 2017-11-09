@@ -30,12 +30,17 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText email, password;
     Button loginBtn, signupBtn;
+    User resumeUser;
     public static final String MY_PREFS_NAME = "MyPrefsFile";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+        editor.putString("userToken", "");
+        editor.putInt("userID", 0);
+        editor.apply();
 
         email = (EditText) findViewById(R.id.email);
         password = (EditText) findViewById(R.id.password);
@@ -63,6 +68,25 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+        String userToken = prefs.getString("userToken", "");
+        String userEmail = prefs.getString("userEmail", "");
+        String password = prefs.getString("password", "");
+        System.out.println(userToken);
+
+        if(!userToken.isEmpty()){
+            try {
+                login(userEmail, password);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
 
     }
@@ -95,6 +119,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     Gson gson = new Gson();
                     final User user = gson.fromJson(responseBody.string(), User.class);
+                    resumeUser = user;
 
                     //Store token in SharedPreferences
                     SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
@@ -114,6 +139,7 @@ public class LoginActivity extends AppCompatActivity {
                               Toast.makeText(LoginActivity.this, "Login Unsuccessful", Toast.LENGTH_SHORT).show();
                           }
                         });
+                    System.out.println("Login Unsuccessful");
                     e.printStackTrace();
                 }
             }
@@ -122,16 +148,12 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        System.out.println("result code: " + resultCode);
-        System.out.println("request code: " + requestCode);
-        if (requestCode == 1) {
-            if(resultCode == LoginActivity.RESULT_OK){
-                Intent intent = new Intent(LoginActivity.this, ThreadActivity.class);
-                intent.putExtra("User", data.getSerializableExtra("User"));
-                startActivity(intent);
-            }
-        }
-    }
+    protected void onDestroy() {
+        super.onDestroy();
+        SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+        editor.putString("userToken", "");
+        editor.putInt("userID", 0);
+        editor.apply();
 
+    }
 }
