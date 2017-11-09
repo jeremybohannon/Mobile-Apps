@@ -30,13 +30,15 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText email, password;
     Button loginBtn, signupBtn;
-    User resumeUser;
+
     public static final String MY_PREFS_NAME = "MyPrefsFile";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        //Ensure userToken and userId is reset on startup
         SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
         editor.putString("userToken", "");
         editor.putInt("userID", 0);
@@ -50,10 +52,18 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                System.out.println("[LoginActivity | onCreate | loginBtn click] " + " Login btn clicked");
                 try {
-                    login(email.getText().toString(), password.getText().toString());
+                    String loginEmail = email.getText().toString();
+                    String loginPassword = password.getText().toString();
+
+                    if(loginEmail.isEmpty() || loginPassword.isEmpty()) {
+                        System.out.println("[LoginActivity | onCreate | loginBtn click] " + " Empty credentials");
+                        displayLoginFailure("Empty Credentials");
+                    } else {
+                        login(loginEmail, loginPassword);
+                    }
                 } catch (Exception e) {
-                    Toast.makeText(LoginActivity.this, "Login Unsuccessful", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
             }
@@ -64,6 +74,7 @@ public class LoginActivity extends AppCompatActivity {
         signupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                System.out.println("[LoginActivity | onCreate | signUp click] " + " Sign up btn clicked");
                 Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
                 startActivity(intent);
             }
@@ -73,17 +84,24 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        System.out.println("[LoginActivity | onResume] " + " In onResume");
 
+        //When this activity is resumed, check if the token has been set, if so we know to log the user in.
         SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
         String userToken = prefs.getString("userToken", "");
-        String userEmail = prefs.getString("userEmail", "");
-        String password = prefs.getString("password", "");
-        System.out.println(userToken);
 
         if(!userToken.isEmpty()){
             try {
+                System.out.println("[LoginActivity | onResume] " + " Token not empty, Token: " + userToken);
+
+                String userEmail = prefs.getString("userEmail", "");
+                String password = prefs.getString("password", "");
+
                 login(userEmail, password);
             } catch (Exception e) {
+                System.out.println("[LoginActivity | onResume] " + " Token empty");
+
+                displayLoginFailure();
                 e.printStackTrace();
             }
         }
@@ -92,6 +110,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void login(String email, String password) throws Exception {
+        System.out.println("[LoginActivity | login] " + " Login with email: " + email);
 
         RequestBody formBody = new FormBody.Builder()
                 .add("email", email)
@@ -105,7 +124,9 @@ public class LoginActivity extends AppCompatActivity {
 
         client.newCall(request).enqueue(new Callback() {
             @Override public void onFailure(Call call, IOException e) {
-                Toast.makeText(LoginActivity.this, "Login Unsuccessful", Toast.LENGTH_SHORT).show();
+                System.out.println("[LoginActivity | login | onFailure] ");
+
+                displayLoginFailure();
                 e.printStackTrace();
             }
 
@@ -114,12 +135,12 @@ public class LoginActivity extends AppCompatActivity {
                     ResponseBody responseBody = response.body();
 
                     if (!response.isSuccessful()) {
-                        throw new IOException("Unexpected code " + response);
+                        displayLoginFailure("Unauthorized");
+                        throw new IOException(""+response);
                     }
 
                     Gson gson = new Gson();
                     final User user = gson.fromJson(responseBody.string(), User.class);
-                    resumeUser = user;
 
                     //Store token in SharedPreferences
                     SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
@@ -127,19 +148,14 @@ public class LoginActivity extends AppCompatActivity {
                     editor.putInt("userID", user.getUser_id());
                     editor.apply();
 
+                    System.out.println("[LoginActivity | login | onResponse] " + " Starting ThreadActivity intent");
+
                     Intent intent = new Intent(LoginActivity.this, ThreadActivity.class);
                     intent.putExtra("User", user);
                     startActivity(intent);
 
-                    System.out.println(user.toString());
                 } catch (Exception e) {
-                    runOnUiThread(
-                        new Runnable() {
-                          public void run() {
-                              Toast.makeText(LoginActivity.this, "Login Unsuccessful", Toast.LENGTH_SHORT).show();
-                          }
-                        });
-                    System.out.println("Login Unsuccessful");
+                    System.out.println("[LoginActivity | login | onResponse] " + " Login failed");
                     e.printStackTrace();
                 }
             }
@@ -147,9 +163,29 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    void displayLoginFailure() {
+        runOnUiThread(
+            new Runnable() {
+                public void run() {
+                    Toast.makeText(LoginActivity.this, "Login Unsuccessful", Toast.LENGTH_SHORT).show();
+                }
+            });
+    }
+
+    void displayLoginFailure(final String message) {
+        runOnUiThread(
+            new Runnable() {
+                public void run() {
+                    Toast.makeText(LoginActivity.this, "Login Unsuccessful, " + message, Toast.LENGTH_SHORT).show();
+                }
+            });
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        System.out.println("[LoginActivity | login | onDestroy] " + "Clean up");
+
         SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
         editor.putString("userToken", "");
         editor.putInt("userID", 0);
