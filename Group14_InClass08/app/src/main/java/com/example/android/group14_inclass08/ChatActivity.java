@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -19,8 +20,10 @@ import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 
@@ -32,6 +35,7 @@ public class ChatActivity extends AppCompatActivity {
     ThreadObject thread;
     String threadId, userToken;
     ListView messageList;
+    ImageView addBtn, homeBtn;
     static MessageAdapter messageAdapter;
 
 
@@ -47,6 +51,8 @@ public class ChatActivity extends AppCompatActivity {
         threadView = (TextView) findViewById(R.id.threadView);
         chatText = (EditText) findViewById(R.id.chatText);
         chatList = (ListView) findViewById(R.id.chatList);
+        addBtn = (ImageView) findViewById(R.id.addBtn);
+        homeBtn = (ImageView) findViewById(R.id.homeBtn);
 
         Intent intent = getIntent();
         thread = (ThreadObject) intent.getSerializableExtra("Thread");
@@ -59,6 +65,23 @@ public class ChatActivity extends AppCompatActivity {
 
         SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
         userToken = prefs.getString("userToken", "");
+
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String message = chatText.getText().toString();
+
+                makeMessage(message);
+            }
+        });
+
+        homeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
 
         getMessages(threadId);
 
@@ -109,6 +132,37 @@ public class ChatActivity extends AppCompatActivity {
         });
     }
 
+    public void makeMessage(String message){
+        RequestBody formBody = new FormBody.Builder()
+                .add("message", message)
+                .add("thread_id", threadId)
+                .build();
+
+        Request request = new Request.Builder()
+                .url("http://ec2-54-164-74-55.compute-1.amazonaws.com/api/message/add")
+                .header("Authorization", "BEARER " + returnUserToken())
+                .post(formBody)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override public void onResponse(Call call, Response response) throws IOException {
+                try {
+                    if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+                    System.out.println("Created message...");
+                    //TODO make not bad... like omg... this is so bad.. please don't judge
+                    getMessages(threadId);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+    }
+
     public void updateThread() {
         runOnUiThread(new Runnable() {
             @Override
@@ -116,5 +170,19 @@ public class ChatActivity extends AppCompatActivity {
                 messageAdapter.notifyDataSetChanged();
             }
         });
+    }
+
+    public int returnUserId(){
+        SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+        int userId = 0;
+        userId = prefs.getInt("userID", 0);
+        return userId;
+    }
+
+    public String returnUserToken(){
+        SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+        String userId = "";
+        userId = prefs.getString("userToken", "");
+        return userId;
     }
 }

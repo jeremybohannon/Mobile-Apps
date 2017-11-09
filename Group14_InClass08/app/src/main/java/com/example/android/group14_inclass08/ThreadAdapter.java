@@ -64,7 +64,7 @@ public class ThreadAdapter extends ArrayAdapter<ThreadObject> {
 
                     Request request = new Request.Builder()
                             .url("http://ec2-54-164-74-55.compute-1.amazonaws.com/api/thread/delete/" + object.getId())
-                            .header("Authorization", "BEARER " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MDk2ODY2OTYsImV4cCI6MTU0MTIyMjY5NiwianRpIjoiMkdKV2c3U0hKS3NiT2IyZVNkVzFWayIsInVzZXIiOjF9.rRTLX3i-kFYxAtbhUXrqQKDxXs0KoTEgV4iRX2q3p5M")
+                            .header("Authorization", "BEARER " + activity.returnUserToken())
                             .build();
 
                     client.newCall(request).enqueue(new Callback() {

@@ -130,6 +130,8 @@ public class ThreadActivity extends AppCompatActivity {
                         ThreadObject object = threads.get(i);
 
                         System.out.println("Object: " + object.getTitle());
+                        System.out.println("ID: " + object.getUser_id());
+                        System.out.println("User id: " + user.getUser_id());
                         Intent intent = new Intent(ThreadActivity.this, ChatActivity.class);
                         intent.putExtra("Thread", object);
                         startActivity(intent);
@@ -146,7 +148,7 @@ public class ThreadActivity extends AppCompatActivity {
 
         Request request = new Request.Builder()
                 .url("http://ec2-54-164-74-55.compute-1.amazonaws.com/api/thread/add")
-                .header("Authorization", "BEARER " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MDk2ODY2OTYsImV4cCI6MTU0MTIyMjY5NiwianRpIjoiMkdKV2c3U0hKS3NiT2IyZVNkVzFWayIsInVzZXIiOjF9.rRTLX3i-kFYxAtbhUXrqQKDxXs0KoTEgV4iRX2q3p5M")
+                .header("Authorization", "BEARER " + returnUserToken())
                 .post(formBody)
                 .build();
 
@@ -160,6 +162,7 @@ public class ThreadActivity extends AppCompatActivity {
                     if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
                     System.out.println("Created thread...");
                     //TODO make not bad... like omg... this is so bad.. please don't judge
+
                     getThreads();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -182,6 +185,13 @@ public class ThreadActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
         int userId = 0;
         userId = prefs.getInt("userID", 0);
+        return userId;
+    }
+
+    public String returnUserToken(){
+        SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+        String userId = "";
+        userId = prefs.getString("userToken", "");
         return userId;
     }
 

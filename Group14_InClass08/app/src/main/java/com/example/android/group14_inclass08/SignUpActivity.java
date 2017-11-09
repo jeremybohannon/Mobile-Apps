@@ -23,6 +23,8 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 
+import static com.example.android.group14_inclass08.R.id.parent;
+
 public class SignUpActivity extends AppCompatActivity {
 
     private final OkHttpClient client = new OkHttpClient();
@@ -59,10 +61,14 @@ public class SignUpActivity extends AppCompatActivity {
                     if (firstnameVal.isEmpty() || lastnameVal.isEmpty() || emailVal.isEmpty() || passwordVal.isEmpty() || repeatPasswordVal.isEmpty()) {
                         Toast.makeText(SignUpActivity.this, "Please complete all fields", Toast.LENGTH_SHORT).show();
                     } else {
-                        if (passwordVal.equals(repeatPasswordVal)) {
-                            signup(firstnameVal, lastnameVal, emailVal, passwordVal);
+                        if(passwordVal.length() < 6) {
+                            Toast.makeText(SignUpActivity.this, "Password must be 6 characters long", Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(SignUpActivity.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
+                            if (passwordVal.equals(repeatPasswordVal)) {
+                                signup(firstnameVal, lastnameVal, emailVal, passwordVal);
+                            } else {
+                                Toast.makeText(SignUpActivity.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
+                            }
                         }
                     }
                 } catch (Exception e) {
@@ -107,12 +113,26 @@ public class SignUpActivity extends AppCompatActivity {
                     if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
 
                     Gson gson = new Gson();
-                    User user = gson.fromJson(responseBody.string(), User.class);
+                    final User user = gson.fromJson(responseBody.string(), User.class);
 
-                    //TODO shared preferences
+                    SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+                    editor.putString("userToken", user.getToken());
+                    editor.putInt("userId", user.getUser_id());
+                    editor.apply();
 
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            Toast.makeText(SignUpActivity.this, "User " + user.getUser_fname() + " " + user.getUser_lname() + " created.", Toast.LENGTH_SHORT).show();
 
-                    System.out.println(user.toString());
+                        }
+                    });
+
+                    //TODO get the return to work
+                    System.out.println("Returning to login......");
+                    Intent returnIntent = new Intent();
+                    returnIntent.putExtra("User", user);
+                    setResult(LoginActivity.RESULT_OK, returnIntent);
+                    finish();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

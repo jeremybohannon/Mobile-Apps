@@ -61,18 +61,18 @@ public class MessageAdapter extends ArrayAdapter<MessageObject> {
 
 
 
-//        if(Integer.parseInt(object.getUser_id()) == activity.returnUserId()){
+        if(Integer.parseInt(object.getUser_id()) == activity.returnUserId()){
 
-        MessageViewHolder.delete.setVisibility(View.VISIBLE);
+            MessageViewHolder.delete.setVisibility(View.VISIBLE);
 
-        MessageViewHolder.delete.setOnClickListener(new View.OnClickListener() {
+            MessageViewHolder.delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     System.out.println("Thread clicked: " + object.getMessage());
 
                     Request request = new Request.Builder()
                             .url("http://ec2-54-164-74-55.compute-1.amazonaws.com/api/message/delete/" + object.getId())
-                            .header("Authorization", "BEARER " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MDk2ODY2OTYsImV4cCI6MTU0MTIyMjY5NiwianRpIjoiMkdKV2c3U0hKS3NiT2IyZVNkVzFWayIsInVzZXIiOjF9.rRTLX3i-kFYxAtbhUXrqQKDxXs0KoTEgV4iRX2q3p5M")
+                            .header("Authorization", "BEARER " + activity.returnUserToken())
                             .build();
 
                     client.newCall(request).enqueue(new Callback() {
@@ -101,9 +101,9 @@ public class MessageAdapter extends ArrayAdapter<MessageObject> {
                 }
             });
 
-//        } else {
-//            viewHolder.delete.setVisibility(View.GONE);
-//        }
+        } else {
+            MessageViewHolder.delete.setVisibility(View.GONE);
+        }
 
 
         return view;
