@@ -8,7 +8,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import org.ocpsoft.prettytime.PrettyTime;
+
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import okhttp3.Call;
@@ -57,8 +62,16 @@ public class MessageAdapter extends ArrayAdapter<MessageObject> {
 
         MessageViewHolder.message.setText(object.getMessage());
         MessageViewHolder.user.setText(object.getUser_fname() + " " + object.getUser_lname());
-        MessageViewHolder.date.setText(object.getCreated_at());
 
+        PrettyTime p = new PrettyTime();
+        Date date = null;
+        try {
+            date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(object.getCreated_at());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        MessageViewHolder.date.setText(p.format(date));
 
 
         if(Integer.parseInt(object.getUser_id()) == activity.returnUserId()){

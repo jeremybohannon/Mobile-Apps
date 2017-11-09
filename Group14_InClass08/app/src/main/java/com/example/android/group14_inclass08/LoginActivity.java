@@ -108,7 +108,12 @@ public class LoginActivity extends AppCompatActivity {
 
                     System.out.println(user.toString());
                 } catch (Exception e) {
-                    Toast.makeText(LoginActivity.this, "Login Unsuccessful", Toast.LENGTH_SHORT).show();
+                    runOnUiThread(
+                        new Runnable() {
+                          public void run() {
+                              Toast.makeText(LoginActivity.this, "Login Unsuccessful", Toast.LENGTH_SHORT).show();
+                          }
+                        });
                     e.printStackTrace();
                 }
             }
