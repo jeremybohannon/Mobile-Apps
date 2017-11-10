@@ -48,6 +48,7 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        setTitle("Chat Room");
 
         threadView = (TextView) findViewById(R.id.threadView);
         chatText = (EditText) findViewById(R.id.chatText);

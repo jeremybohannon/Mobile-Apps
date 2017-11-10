@@ -85,6 +85,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         System.out.println("[LoginActivity | onResume] " + " In onResume");
+        setTitle("Chat Room");
 
         password.setText("");
 

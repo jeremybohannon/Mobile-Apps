@@ -46,6 +46,7 @@ public class ThreadActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        setTitle("Message Threads");
 
         nameView = (TextView) findViewById(R.id.threadView);
         threadText = (EditText) findViewById(R.id.chatText);
