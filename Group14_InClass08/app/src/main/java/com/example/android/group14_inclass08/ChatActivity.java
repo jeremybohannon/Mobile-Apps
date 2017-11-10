@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -71,7 +72,12 @@ public class ChatActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String message = chatText.getText().toString();
 
-                makeMessage(message);
+                if(message.isEmpty()){
+                    Toast.makeText(ChatActivity.this, "Chat needs a message...", Toast.LENGTH_SHORT).show();
+                } else {
+                    chatText.setText("");
+                    makeMessage(message);
+                }
             }
         });
 

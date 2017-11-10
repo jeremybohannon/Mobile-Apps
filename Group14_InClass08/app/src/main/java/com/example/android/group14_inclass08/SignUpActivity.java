@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,13 +22,11 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 
-import static com.example.android.group14_inclass08.R.id.parent;
-
 public class SignUpActivity extends AppCompatActivity {
 
     private final OkHttpClient client = new OkHttpClient();
 
-    EditText firstname, lastname, email, password, repeatPassword;
+    EditText firstName, lastName, email, password, repeatPassword;
     Button signUpBtn, cancelBtn;
     public static final String MY_PREFS_NAME = "MyPrefsFile";
 
@@ -38,8 +35,8 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        firstname = (EditText) findViewById(R.id.firstNameText);
-        lastname = (EditText) findViewById(R.id.lastNameText);
+        firstName = (EditText) findViewById(R.id.firstNameText);
+        lastName = (EditText) findViewById(R.id.lastNameText);
         email = (EditText) findViewById(R.id.emailText);
         password = (EditText) findViewById(R.id.passwordText);
         repeatPassword = (EditText) findViewById(R.id.repeatPasswordText);
@@ -50,22 +47,22 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
-                    String firstnameVal, lastnameVal, emailVal, passwordVal, repeatPasswordVal;
+                    String firstNameVal, lastNameVal, emailVal, passwordVal, repeatPasswordVal;
 
-                    firstnameVal = firstname.getText().toString();
-                    lastnameVal = lastname.getText().toString();
+                    firstNameVal = firstName.getText().toString();
+                    lastNameVal = lastName.getText().toString();
                     emailVal = email.getText().toString();
                     passwordVal = password.getText().toString();
                     repeatPasswordVal = repeatPassword.getText().toString();
 
-                    if (firstnameVal.isEmpty() || lastnameVal.isEmpty() || emailVal.isEmpty() || passwordVal.isEmpty() || repeatPasswordVal.isEmpty()) {
+                    if (firstNameVal.isEmpty() || lastNameVal.isEmpty() || emailVal.isEmpty() || passwordVal.isEmpty() || repeatPasswordVal.isEmpty()) {
                         Toast.makeText(SignUpActivity.this, "Please complete all fields", Toast.LENGTH_SHORT).show();
                     } else {
                         if(passwordVal.length() < 6) {
                             Toast.makeText(SignUpActivity.this, "Password must be 6 characters long", Toast.LENGTH_SHORT).show();
                         } else {
                             if (passwordVal.equals(repeatPasswordVal)) {
-                                signup(firstnameVal, lastnameVal, emailVal, passwordVal);
+                                signup(firstNameVal, lastNameVal, emailVal, passwordVal);
                             } else {
                                 Toast.makeText(SignUpActivity.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
                             }

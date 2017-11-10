@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -65,7 +66,12 @@ public class ThreadActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String title = threadText.getText().toString();
 
-                makeThread(title);
+                if(title.isEmpty()){
+                    Toast.makeText(ThreadActivity.this, "Thread needs a name...", Toast.LENGTH_SHORT).show();
+                } else {
+                    threadText.setText("");
+                    makeThread(title);
+                }
             }
         });
 
@@ -165,8 +171,8 @@ public class ThreadActivity extends AppCompatActivity {
                 try {
                     if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
                     System.out.println("Created thread...");
-                    //TODO make not bad... like omg... this is so bad.. please don't judge
 
+                    //TODO make not bad... like omg... this is so bad.. please don't judge
                     getThreads();
                 } catch (Exception e) {
                     e.printStackTrace();

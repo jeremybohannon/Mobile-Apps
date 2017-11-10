@@ -86,6 +86,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onResume();
         System.out.println("[LoginActivity | onResume] " + " In onResume");
 
+        password.setText("");
+
         //When this activity is resumed, check if the token has been set, if so we know to log the user in.
         SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
         String userToken = prefs.getString("userToken", "");
