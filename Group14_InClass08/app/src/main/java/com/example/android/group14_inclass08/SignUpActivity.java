@@ -128,9 +128,28 @@ public class SignUpActivity extends AppCompatActivity {
 
                     finish();
                 } catch (Exception e) {
+                    displayLoginFailure("User already created, or invalid");
                     e.printStackTrace();
                 }
             }
         });
+    }
+
+    void displayLoginFailure() {
+        runOnUiThread(
+                new Runnable() {
+                    public void run() {
+                        Toast.makeText(SignUpActivity.this, "Sign up Unsuccessful", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    void displayLoginFailure(final String message) {
+        runOnUiThread(
+                new Runnable() {
+                    public void run() {
+                        Toast.makeText(SignUpActivity.this, "Sign up Unsuccessful, " + message, Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }
