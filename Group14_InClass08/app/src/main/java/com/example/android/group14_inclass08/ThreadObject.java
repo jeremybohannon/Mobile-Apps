@@ -1,7 +1,9 @@
 package com.example.android.group14_inclass08;
 
 import java.io.Serializable;
-
+// Jeremy Bohannon Elizabeth Thompson
+// In class 08
+// threadobject.java
 public class ThreadObject implements Serializable {
     private String title;
     private String user_id;

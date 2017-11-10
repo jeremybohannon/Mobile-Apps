@@ -28,6 +28,9 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 
+// Jeremy Bohannon Elizabeth Thompson
+// In class 08
+// chatactivity.java
 public class ChatActivity extends AppCompatActivity {
 
     TextView threadView;

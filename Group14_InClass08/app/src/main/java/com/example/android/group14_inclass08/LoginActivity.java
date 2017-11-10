@@ -24,6 +24,9 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 
+// Jeremy Bohannon Elizabeth Thompson
+// In class 08
+// loginactivity.java
 public class LoginActivity extends AppCompatActivity {
 
     private final OkHttpClient client = new OkHttpClient();

@@ -2,10 +2,9 @@ package com.example.android.group14_inclass08;
 
 import java.util.ArrayList;
 
-/**
- * Created by jeremybohannon on 11/8/17.
- */
-
+// Jeremy Bohannon Elizabeth Thompson
+// In class 08
+// message.java
 public class Message {
     ArrayList<MessageObject> messages;
 

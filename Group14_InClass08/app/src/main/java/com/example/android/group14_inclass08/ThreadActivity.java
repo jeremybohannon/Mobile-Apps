@@ -26,7 +26,9 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
-
+// Jeremy Bohannon Elizabeth Thompson
+// In class 08
+// threadactivity.java
 public class ThreadActivity extends AppCompatActivity {
 
     TextView nameView;

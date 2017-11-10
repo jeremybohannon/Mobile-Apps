@@ -2,9 +2,9 @@ package com.example.android.group14_inclass08;
 
 import java.io.Serializable;
 
-/**
- * Created by elizabeththompson on 11/6/17.
- */
+// Jeremy Bohannon Elizabeth Thompson
+// In class 08
+// user.java
 
 public class User implements Serializable {
     String status, token, user_email, user_fname, user_lname, user_role;

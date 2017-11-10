@@ -3,10 +3,9 @@ package com.example.android.group14_inclass08;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-/**
- * Created by jeremybohannon on 11/6/17.
- */
-
+// Jeremy Bohannon Elizabeth Thompson
+// In class 08
+// thread.java
 public class Thread implements Serializable {
     ArrayList<ThreadObject> threads;
 

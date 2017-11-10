@@ -23,6 +23,9 @@ import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 
+// Jeremy Bohannon Elizabeth Thompson
+// In class 08
+// messageadapter.java
 public class MessageAdapter extends ArrayAdapter<MessageObject> {
     private final OkHttpClient client = new OkHttpClient();
 

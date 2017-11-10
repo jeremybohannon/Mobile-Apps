@@ -3,7 +3,9 @@ package com.example.android.group14_inclass08;
 /**
  * Created by jeremybohannon on 10/15/17.
  */
-
+// Jeremy Bohannon Elizabeth Thompson
+// In class 08
+// messageobject.java
 public class MessageObject {
     private String message;
     private String user_fname;
