@@ -1,8 +1,6 @@
-package com.example.android.group14_inclass07;
+package com.example.android.group14_inclass09;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
