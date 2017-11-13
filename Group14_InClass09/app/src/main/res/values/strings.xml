@@ -21,4 +21,8 @@
     <string name="label_bio">BIO</string>
     <string name="label_submit">Submit</string>
     <string name="label_createnew">Create New Contact</string>
+    <string name="label_email">Email</string>
+    <string name="label_password">Password</string>
+    <string name="button_lable_login">Login</string>
+    <string name="label_signup_link">Signup</string>
 </resources>
