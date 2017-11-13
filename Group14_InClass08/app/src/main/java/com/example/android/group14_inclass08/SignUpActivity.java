@@ -1,9 +1,9 @@
 package com.example.android.group14_inclass08;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,21 +21,25 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
-
+// Jeremy Bohannon Elizabeth Thompson
+// In class 08
+// signupactivity.java
 public class SignUpActivity extends AppCompatActivity {
 
     private final OkHttpClient client = new OkHttpClient();
 
-    EditText firstname, lastname, email, password, repeatPassword;
+    EditText firstName, lastName, email, password, repeatPassword;
     Button signUpBtn, cancelBtn;
+    public static final String MY_PREFS_NAME = "MyPrefsFile";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+        setTitle("Sign Up");
 
-        firstname = (EditText) findViewById(R.id.firstNameText);
-        lastname = (EditText) findViewById(R.id.lastNameText);
+        firstName = (EditText) findViewById(R.id.firstNameText);
+        lastName = (EditText) findViewById(R.id.lastNameText);
         email = (EditText) findViewById(R.id.emailText);
         password = (EditText) findViewById(R.id.passwordText);
         repeatPassword = (EditText) findViewById(R.id.repeatPasswordText);
@@ -46,21 +50,25 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
-                    String firstnameVal, lastnameVal, emailVal, passwordVal, repeatPasswordVal;
+                    String firstNameVal, lastNameVal, emailVal, passwordVal, repeatPasswordVal;
 
-                    firstnameVal = firstname.getText().toString();
-                    lastnameVal = lastname.getText().toString();
+                    firstNameVal = firstName.getText().toString();
+                    lastNameVal = lastName.getText().toString();
                     emailVal = email.getText().toString();
                     passwordVal = password.getText().toString();
                     repeatPasswordVal = repeatPassword.getText().toString();
 
-                    if (firstnameVal.isEmpty() || lastnameVal.isEmpty() || emailVal.isEmpty() || passwordVal.isEmpty() || repeatPasswordVal.isEmpty()) {
+                    if (firstNameVal.isEmpty() || lastNameVal.isEmpty() || emailVal.isEmpty() || passwordVal.isEmpty() || repeatPasswordVal.isEmpty()) {
                         Toast.makeText(SignUpActivity.this, "Please complete all fields", Toast.LENGTH_SHORT).show();
                     } else {
-                        if (passwordVal.equals(repeatPasswordVal)) {
-                            signup(firstnameVal, lastnameVal, emailVal, passwordVal);
+                        if(passwordVal.length() < 6) {
+                            Toast.makeText(SignUpActivity.this, "Password must be 6 characters long", Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(SignUpActivity.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
+                            if (passwordVal.equals(repeatPasswordVal)) {
+                                signup(firstNameVal, lastNameVal, emailVal, passwordVal);
+                            } else {
+                                Toast.makeText(SignUpActivity.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
+                            }
                         }
                     }
                 } catch (Exception e) {
@@ -80,7 +88,7 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
 
-    public void signup(String firstname, String lastname, String email, String password) throws Exception {
+    public void signup(String firstname, String lastname, String email, final String password) throws Exception {
         RequestBody formBody = new FormBody.Builder()
                 .add("fname", firstname)
                 .add("lname", lastname)
@@ -105,13 +113,45 @@ public class SignUpActivity extends AppCompatActivity {
                     if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
 
                     Gson gson = new Gson();
-                    User user = gson.fromJson(responseBody.string(), User.class);
+                    final User user = gson.fromJson(responseBody.string(), User.class);
 
-                    System.out.println(user.toString());
+                    SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+                    editor.putString("userToken", user.getToken());
+                    editor.putInt("userId", user.getUser_id());
+                    editor.putString("userEmail", user.getUser_email());
+                    editor.putString("password", password);
+                    editor.apply();
+
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            Toast.makeText(SignUpActivity.this, "User " + user.getUser_fname() + " " + user.getUser_lname() + " created.", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                    finish();
                 } catch (Exception e) {
+                    displayLoginFailure("User already created, or invalid");
                     e.printStackTrace();
                 }
             }
         });
+    }
+
+    void displayLoginFailure() {
+        runOnUiThread(
+                new Runnable() {
+                    public void run() {
+                        Toast.makeText(SignUpActivity.this, "Sign up Unsuccessful", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    void displayLoginFailure(final String message) {
+        runOnUiThread(
+                new Runnable() {
+                    public void run() {
+                        Toast.makeText(SignUpActivity.this, "Sign up Unsuccessful, " + message, Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }

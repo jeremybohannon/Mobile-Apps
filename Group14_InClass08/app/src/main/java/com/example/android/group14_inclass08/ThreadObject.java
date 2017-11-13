@@ -1,21 +1,46 @@
 package com.example.android.group14_inclass08;
 
-/**
- * Created by jeremybohannon on 10/15/17.
- */
+import java.io.Serializable;
+// Jeremy Bohannon Elizabeth Thompson
+// In class 08
+// threadobject.java
+public class ThreadObject implements Serializable {
+    private String title;
+    private String user_id;
+    private String id;
 
-public class ThreadObject {
-    private String thread;
-
-    public ThreadObject(String thread) {
-        this.thread = thread;
+    public ThreadObject(String title) {
+        this.title = title;
     }
 
-    public String getThread() {
-        return thread;
+    public String getTitle() {
+        return title;
     }
 
-    public void setThread(String thread) {
-        this.thread = thread;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "ThreadObject{" +
+                "title='" + title + '\'' +
+                '}';
     }
 }
