@@ -19,7 +19,7 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 //Jeremy Bohannon Elizabeth Thompson
-//InClass07
+//InClass09
 //slectavatar.java
 public class SelectAvatar extends Fragment {
     // TODO: Rename parameter arguments, choose names that match

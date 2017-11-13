@@ -23,7 +23,7 @@ import android.widget.RadioGroup;
  * create an instance of this fragment.
  */
 //Jeremy Bohannon Elizabeth Thompson
-//InClass07
+//InClass09
 //createnewcontact.java
 public class CreateNewContact extends Fragment implements SelectAvatar.OnFragmentInteractionListener {
     // TODO: Rename parameter arguments, choose names that match

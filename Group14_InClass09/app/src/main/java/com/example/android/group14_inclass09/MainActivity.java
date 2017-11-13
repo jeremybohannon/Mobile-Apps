@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import java.util.ArrayList;
 //Jeremy Bohannon Elizabeth Thompson
-//InClass07
+//InClass09
 //Mainactivity.java
 public class MainActivity extends AppCompatActivity implements ContactList.OnFragmentInteractionListener,
         CreateNewContact.OnFragmentInteractionListener, SelectAvatar.OnFragmentInteractionListener {

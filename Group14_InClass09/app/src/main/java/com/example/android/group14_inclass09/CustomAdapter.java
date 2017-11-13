@@ -13,7 +13,7 @@ import java.util.List;
  * Created by jeremybohannon on 10/15/17.
  */
 //Jeremy Bohannon Elizabeth Thompson
-//InClass07
+//InClass09
 //customadapter.java
 public class CustomAdapter extends ArrayAdapter<Contact> {
 
