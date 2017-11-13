@@ -1,0 +1,95 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/elizabeththompson/AndroidStudioProjects/InClass05/app/src/main/AndroidManifest.xml:2:1-23:12
+	package
+		ADDED from /Users/elizabeththompson/AndroidStudioProjects/InClass05/app/src/main/AndroidManifest.xml:3:5-39
+		INJECTED from /Users/elizabeththompson/AndroidStudioProjects/InClass05/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/elizabeththompson/AndroidStudioProjects/InClass05/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/elizabeththompson/AndroidStudioProjects/InClass05/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/elizabeththompson/AndroidStudioProjects/InClass05/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/elizabeththompson/AndroidStudioProjects/InClass05/app/src/main/AndroidManifest.xml:2:11-69
+	android:versionCode
+		INJECTED from /Users/elizabeththompson/AndroidStudioProjects/InClass05/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/elizabeththompson/AndroidStudioProjects/InClass05/app/src/main/AndroidManifest.xml
+uses-permission#android.permission.INTERNET
+ADDED from /Users/elizabeththompson/AndroidStudioProjects/InClass05/app/src/main/AndroidManifest.xml:4:5-67
+	android:name
+		ADDED from /Users/elizabeththompson/AndroidStudioProjects/InClass05/app/src/main/AndroidManifest.xml:4:22-64
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from /Users/elizabeththompson/AndroidStudioProjects/InClass05/app/src/main/AndroidManifest.xml:5:5-79
+	android:name
+		ADDED from /Users/elizabeththompson/AndroidStudioProjects/InClass05/app/src/main/AndroidManifest.xml:5:22-76
+application
+ADDED from /Users/elizabeththompson/AndroidStudioProjects/InClass05/app/src/main/AndroidManifest.xml:7:5-21:19
+MERGED from [com.android.support:appcompat-v7:26.0.0-alpha1] /Users/elizabeththompson/.android/build-cache/7067c9695b597bdedcbd2ca7480371dbf7f5edfa/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-v4:26.0.0-alpha1] /Users/elizabeththompson/.android/build-cache/708458830d3c14a43f0953f78e3b04ef0631ca02/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-media-compat:26.0.0-alpha1] /Users/elizabeththompson/.android/build-cache/ff1a3099f2ee45c00865ecac4dcad7708b4a374f/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-fragment:26.0.0-alpha1] /Users/elizabeththompson/.android/build-cache/9c96484b2f4ece0724f9a3169db2637fa4abc9c3/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-ui:26.0.0-alpha1] /Users/elizabeththompson/.android/build-cache/c5712836c37947eae6213a9c0c7e83e5af1e687b/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-utils:26.0.0-alpha1] /Users/elizabeththompson/.android/build-cache/36c60f78eac59465bf3c9db0ed9b809f6950d9f1/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:animated-vector-drawable:26.0.0-alpha1] /Users/elizabeththompson/.android/build-cache/d46f2c65f8ecc9c92f59901743d45e8ccd8eff03/output/AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:support-vector-drawable:26.0.0-alpha1] /Users/elizabeththompson/.android/build-cache/d9477ee07c09166b76c1d220944efc2b7aad5ca4/output/AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:support-compat:26.0.0-alpha1] /Users/elizabeththompson/.android/build-cache/c1fcb674bc043b3fd1b8baea9da257743e684b39/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /Users/elizabeththompson/.android/build-cache/3eb446eea9ef699883bc45f5516a4f633b2d4af1/output/AndroidManifest.xml:9:5-20
+	android:label
+		ADDED from /Users/elizabeththompson/AndroidStudioProjects/InClass05/app/src/main/AndroidManifest.xml:10:9-41
+	android:supportsRtl
+		ADDED from /Users/elizabeththompson/AndroidStudioProjects/InClass05/app/src/main/AndroidManifest.xml:12:9-35
+	android:roundIcon
+		ADDED from /Users/elizabeththompson/AndroidStudioProjects/InClass05/app/src/main/AndroidManifest.xml:11:9-54
+	android:allowBackup
+		ADDED from /Users/elizabeththompson/AndroidStudioProjects/InClass05/app/src/main/AndroidManifest.xml:8:9-35
+	android:icon
+		ADDED from /Users/elizabeththompson/AndroidStudioProjects/InClass05/app/src/main/AndroidManifest.xml:9:9-43
+	android:theme
+		ADDED from /Users/elizabeththompson/AndroidStudioProjects/InClass05/app/src/main/AndroidManifest.xml:13:9-40
+activity#mobileapps.com.inclass05.MainActivity
+ADDED from /Users/elizabeththompson/AndroidStudioProjects/InClass05/app/src/main/AndroidManifest.xml:14:9-20:20
+	android:name
+		ADDED from /Users/elizabeththompson/AndroidStudioProjects/InClass05/app/src/main/AndroidManifest.xml:14:19-47
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from /Users/elizabeththompson/AndroidStudioProjects/InClass05/app/src/main/AndroidManifest.xml:15:13-19:29
+action#android.intent.action.MAIN
+ADDED from /Users/elizabeththompson/AndroidStudioProjects/InClass05/app/src/main/AndroidManifest.xml:16:17-69
+	android:name
+		ADDED from /Users/elizabeththompson/AndroidStudioProjects/InClass05/app/src/main/AndroidManifest.xml:16:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/elizabeththompson/AndroidStudioProjects/InClass05/app/src/main/AndroidManifest.xml:18:17-77
+	android:name
+		ADDED from /Users/elizabeththompson/AndroidStudioProjects/InClass05/app/src/main/AndroidManifest.xml:18:27-74
+uses-sdk
+INJECTED from /Users/elizabeththompson/AndroidStudioProjects/InClass05/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+MERGED from [com.android.support:appcompat-v7:26.0.0-alpha1] /Users/elizabeththompson/.android/build-cache/7067c9695b597bdedcbd2ca7480371dbf7f5edfa/output/AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:support-v4:26.0.0-alpha1] /Users/elizabeththompson/.android/build-cache/708458830d3c14a43f0953f78e3b04ef0631ca02/output/AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-media-compat:26.0.0-alpha1] /Users/elizabeththompson/.android/build-cache/ff1a3099f2ee45c00865ecac4dcad7708b4a374f/output/AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-fragment:26.0.0-alpha1] /Users/elizabeththompson/.android/build-cache/9c96484b2f4ece0724f9a3169db2637fa4abc9c3/output/AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-core-ui:26.0.0-alpha1] /Users/elizabeththompson/.android/build-cache/c5712836c37947eae6213a9c0c7e83e5af1e687b/output/AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-utils:26.0.0-alpha1] /Users/elizabeththompson/.android/build-cache/36c60f78eac59465bf3c9db0ed9b809f6950d9f1/output/AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:animated-vector-drawable:26.0.0-alpha1] /Users/elizabeththompson/.android/build-cache/d46f2c65f8ecc9c92f59901743d45e8ccd8eff03/output/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:26.0.0-alpha1] /Users/elizabeththompson/.android/build-cache/d9477ee07c09166b76c1d220944efc2b7aad5ca4/output/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:26.0.0-alpha1] /Users/elizabeththompson/.android/build-cache/c1fcb674bc043b3fd1b8baea9da257743e684b39/output/AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /Users/elizabeththompson/.android/build-cache/3eb446eea9ef699883bc45f5516a4f633b2d4af1/output/AndroidManifest.xml:5:5-7:41
+	tools:overrideLibrary
+		ADDED from [com.android.support:appcompat-v7:26.0.0-alpha1] /Users/elizabeththompson/.android/build-cache/7067c9695b597bdedcbd2ca7480371dbf7f5edfa/output/AndroidManifest.xml:23:9-75
+	android:targetSdkVersion
+		INJECTED from /Users/elizabeththompson/AndroidStudioProjects/InClass05/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/elizabeththompson/AndroidStudioProjects/InClass05/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/elizabeththompson/AndroidStudioProjects/InClass05/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/elizabeththompson/AndroidStudioProjects/InClass05/app/src/main/AndroidManifest.xml
+meta-data#android.support.VERSION
+ADDED from [com.android.support:appcompat-v7:26.0.0-alpha1] /Users/elizabeththompson/.android/build-cache/7067c9695b597bdedcbd2ca7480371dbf7f5edfa/output/AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:support-v4:26.0.0-alpha1] /Users/elizabeththompson/.android/build-cache/708458830d3c14a43f0953f78e3b04ef0631ca02/output/AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:support-media-compat:26.0.0-alpha1] /Users/elizabeththompson/.android/build-cache/ff1a3099f2ee45c00865ecac4dcad7708b4a374f/output/AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:support-fragment:26.0.0-alpha1] /Users/elizabeththompson/.android/build-cache/9c96484b2f4ece0724f9a3169db2637fa4abc9c3/output/AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:support-core-ui:26.0.0-alpha1] /Users/elizabeththompson/.android/build-cache/c5712836c37947eae6213a9c0c7e83e5af1e687b/output/AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:support-core-utils:26.0.0-alpha1] /Users/elizabeththompson/.android/build-cache/36c60f78eac59465bf3c9db0ed9b809f6950d9f1/output/AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:animated-vector-drawable:26.0.0-alpha1] /Users/elizabeththompson/.android/build-cache/d46f2c65f8ecc9c92f59901743d45e8ccd8eff03/output/AndroidManifest.xml:22:5-24:41
+MERGED from [com.android.support:support-vector-drawable:26.0.0-alpha1] /Users/elizabeththompson/.android/build-cache/d9477ee07c09166b76c1d220944efc2b7aad5ca4/output/AndroidManifest.xml:22:5-24:41
+MERGED from [com.android.support:support-compat:26.0.0-alpha1] /Users/elizabeththompson/.android/build-cache/c1fcb674bc043b3fd1b8baea9da257743e684b39/output/AndroidManifest.xml:25:5-27:41
+	android:value
+		ADDED from [com.android.support:appcompat-v7:26.0.0-alpha1] /Users/elizabeththompson/.android/build-cache/7067c9695b597bdedcbd2ca7480371dbf7f5edfa/output/AndroidManifest.xml:27:9-38
+	android:name
+		ADDED from [com.android.support:appcompat-v7:26.0.0-alpha1] /Users/elizabeththompson/.android/build-cache/7067c9695b597bdedcbd2ca7480371dbf7f5edfa/output/AndroidManifest.xml:26:9-47

@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">HW2_Group14</string>
+    <string name="first">First</string>
+    <string name="last">Last</string>
+    <string name="company">Company</string>
+    <string name="phone">Phone</string>
+    <string name="email">Email</string>
+    <string name="url">URL</string>
+    <string name="address">Address</string>
+    <string name="birthday">Birthday</string>
+    <string name="nickname">Nickname</string>
+    <string name="facebook">Facebook Profile URL</string>
+    <string name="twitter">Twitter Profile URL</string>
+    <string name="skype">Skype</string>
+    <string name="youtube">YouTube Channel</string>
+    <string name="saveBtn">Save</string>
+    <string name="button_create_new_contact">Create New</string>
+    <string name="button_edit_contact">Edit Contact</string>
+    <string name="button_delete_contact">Delete Contact</string>
+    <string name="button_display_contact">Display Contact</string>
+    <string name="button_finish">Finish</string>
+
+    <string name="label_first_name">First Name</string>
+    <string name="label_last_name">Last Name</string>
+    <string name="label_phone">(000) 000-0000</string>
+    <string name="label_company">Company</string>
+    <string name="label_phone_number">Phone</string>
+    <string name="label_email">Email</string>
+    <string name="label_url">Url</string>
+    <string name="label_address">Address</string>
+    <string name="label_birthday">Birthday</string>
+    <string name="label_nickname">Nickname</string>
+    <string name="label_facebookUrl">Facebook URL</string>
+    <string name="label_twitterUrl">Twiter URL</string>
+    <string name="label_skype">Skype</string>
+    <string name="label_youtubeChannel">Youtube Channel</string>
+</resources>

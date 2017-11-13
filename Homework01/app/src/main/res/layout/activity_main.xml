@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+homework 01
+activity_main.xml
+elizabeth thompson
+-->
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="elizabeththompson.com.homework01.MainActivity">
+
+    <TextView
+        android:id="@+id/weightLabel"
+        android:gravity="left|center"
+        android:layout_width="0dp"
+        android:layout_height="41dp"
+        android:text="@string/label_weight"
+        android:textAppearance="@android:style/TextAppearance.Material.Medium"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintRight_toLeftOf="@+id/weightEditText"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/saveUserDataButton"
+        android:layout_marginTop="16dp"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="10dp" />
+
+    <EditText
+        android:id="@+id/weightEditText"
+        android:layout_width="137dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="115dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="@string/hint_weight"
+        android:inputType="number"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintTop_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="115dp" />
+
+    <Switch
+        android:id="@+id/genderSwitch"
+        android:gravity="left|center"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="15dp"
+        android:fontFamily="sans-serif"
+        android:text="@string/label_gender_male"
+        android:textAllCaps="false"
+        android:textAppearance="@android:style/TextAppearance.Material.Medium"
+        android:textColor="?android:attr/textColorSecondary"
+        android:textSize="18sp"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/saveUserDataButton"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="15dp"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="17dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/weightEditText"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="8dp" />
+
+    <Button
+        android:id="@+id/saveUserDataButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/button_label_save"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weightEditText"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintTop_creator="1"
+        app:layout_constraintHorizontal_bias="0.0" />
+
+    <TextView
+        android:id="@+id/drinkSizeLabel"
+        android:gravity="left|center"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="6dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/label_drink_size"
+        android:textAppearance="@android:style/TextAppearance.Material.Medium"
+        app:layout_constraintBottom_toBottomOf="@+id/drinkSizeRadioGroup"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="@+id/alcoholPercentageLabel"
+        app:layout_constraintTop_toTopOf="@+id/drinkSizeRadioGroup"
+        tools:layout_constraintBottom_creator="1"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintTop_creator="1"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <RadioGroup
+        android:id="@+id/drinkSizeRadioGroup"
+        android:layout_width="261dp"
+        android:layout_height="32dp"
+        android:layout_marginBottom="17dp"
+        android:checkedButton="@+id/drinkSizeRadio12"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/alcoholPercentageSeekBar"
+        app:layout_constraintLeft_toLeftOf="@+id/alcoholPercentageSeekBar"
+        tools:layout_constraintBottom_creator="1"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginLeft="2dp"
+        android:layout_marginStart="2dp">
+
+        <RadioButton
+            android:id="@+id/drinkSizeRadio01"
+            android:layout_width="63dp"
+            android:layout_height="31dp"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="@string/radio_label_drink_size_1"
+            tools:layout_editor_absoluteX="134dp"
+            tools:layout_editor_absoluteY="148dp" />
+
+        <RadioButton
+            android:id="@+id/drinkSizeRadio05"
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.05"
+            android:text="@string/radio_label_drink_size_5"
+            tools:layout_editor_absoluteX="218dp"
+            tools:layout_editor_absoluteY="148dp" />
+
+        <RadioButton
+            android:id="@+id/drinkSizeRadio12"
+            android:layout_width="74dp"
+            android:layout_height="31dp"
+            android:layout_weight="1"
+            android:text="@string/radio_label_drink_size_12"
+            tools:layout_editor_absoluteX="301dp"
+            tools:layout_editor_absoluteY="148dp" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/alcoholPercentageLabel"
+        android:gravity="left|center"
+        android:layout_width="91dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="9dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="9dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/label_alcohol_percentage"
+        android:textAppearance="@android:style/TextAppearance.Material.Medium"
+        app:layout_constraintBottom_toBottomOf="@+id/alcoholPercentageSeekBar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/alcoholPercentageSeekBar"
+        tools:layout_constraintBottom_creator="1"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintTop_creator="1"
+        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/drinkSizeLabel"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <SeekBar
+        android:id="@+id/alcoholPercentageSeekBar"
+        android:layout_width="229dp"
+        android:layout_height="36dp"
+        android:layout_marginEnd="35dp"
+        android:max="25"
+        android:progress="5"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        app:layout_constraintRight_toRightOf="@+id/resetButton"
+        android:layout_marginTop="222dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginRight="35dp" />
+
+    <TextView
+        android:id="@+id/alcoholPercentageValueLabel"
+        android:gravity="left|center"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="5%"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toBottomOf="@+id/alcoholPercentageSeekBar"
+        android:layout_marginEnd="1dp"
+        app:layout_constraintRight_toRightOf="@+id/drinkSizeRadioGroup"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintTop_toTopOf="@+id/alcoholPercentageSeekBar"
+        app:layout_constraintLeft_toRightOf="@+id/alcoholPercentageSeekBar"
+        android:layout_marginRight="1dp" />
+
+    <Button
+        android:id="@+id/addDrinkButton"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:text="@string/button_label_add_drink"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="12dp"
+        app:layout_constraintRight_toLeftOf="@+id/resetButton"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@+id/alcoholPercentageLabel"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="12dp"
+        app:layout_constraintHorizontal_bias="1.0" />
+
+    <Button
+        android:id="@+id/resetButton"
+        android:layout_width="176dp"
+        android:layout_height="49dp"
+        android:text="@string/button_label_reset"
+        tools:layout_constraintRight_creator="1"
+        android:layout_marginEnd="9dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBaseline_toBaselineOf="@+id/addDrinkButton"
+        tools:layout_constraintBaseline_creator="1"
+        android:layout_marginRight="9dp" />
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        android:layout_marginTop="50dp"
+        app:layout_constraintTop_toBottomOf="@+id/addDrinkButton"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintHorizontal_bias="0.503"
+        android:id="@+id/bacLevelLayout">
+
+        <TextView
+            android:id="@+id/bacLevelLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/bacLevelValueLabel"
+            android:layout_alignBottom="@+id/bacLevelValueLabel"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:text="@string/label_bac_level"
+            android:textAppearance="@android:style/TextAppearance.Material.Display1"
+            app:layout_constraintBaseline_toBaselineOf="@+id/bacLevelValueLabel"
+            tools:layout_constraintBaseline_creator="1"
+            tools:layout_constraintLeft_creator="1"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <TextView
+            android:id="@+id/bacLevelValueLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/bacLevelLabel"
+            android:layout_toRightOf="@+id/bacLevelLabel"
+            android:text="@string/label_bac_level_value"
+            android:textAppearance="@android:style/TextAppearance.Material.Display1"
+            android:layout_marginStart="9dp"
+            tools:layout_constraintTop_creator="1"
+            app:layout_constraintTop_toBottomOf="parent"
+            tools:layout_constraintLeft_creator="1"
+            app:layout_constraintLeft_toRightOf="@+id/bacLevelLabel"
+            android:layout_marginLeft="9dp" />
+    </android.support.constraint.ConstraintLayout>
+
+    <ProgressBar
+        android:id="@+id/bacLevelProgressBar"
+        android:max="25"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="9dp"
+        android:layout_marginStart="9dp"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bacLevelLayout"
+        android:layout_marginLeft="9dp"
+        android:layout_marginRight="9dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_marginTop="16dp" />
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/bacLevelProgressBar"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintHorizontal_bias="0.507"
+        android:id="@+id/statusLayout">
+
+        <TextView
+            android:id="@+id/statusLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/statusValueLabel"
+            android:layout_alignBottom="@+id/statusValueLabel"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:text="@string/label_status"
+            android:textAppearance="@android:style/TextAppearance.Material.Medium"
+            app:layout_constraintBaseline_toBaselineOf="@+id/statusValueLabel"
+            tools:layout_constraintBaseline_creator="1"
+            tools:layout_constraintLeft_creator="1"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <TextView
+            android:id="@+id/statusValueLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="9dp"
+            android:layout_marginStart="9dp"
+            android:layout_toEndOf="@+id/statusLabel"
+            android:layout_toRightOf="@+id/statusLabel"
+            android:background="@color/colorSafeStatus"
+            android:text="@string/label_status_value_safe"
+            android:textAppearance="@android:style/TextAppearance.Material.Medium"
+            app:layout_constraintLeft_toRightOf="@+id/statusLabel"
+            app:layout_constraintTop_toBottomOf="parent"
+            tools:layout_constraintLeft_creator="1"
+            tools:layout_constraintTop_creator="1"
+            tools:text="@string/label_status_value_safe"
+            android:padding="5dp" />
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>

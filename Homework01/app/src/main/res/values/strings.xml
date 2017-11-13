@@ -1,0 +1,31 @@
+<!--
+homework 01
+strings.xml
+elizabeth thompson
+-->
+
+<resources>
+    <string name="app_name">BAC Calculator</string>
+
+    <string name="label_weight">Weight (lbs)</string>
+    <string name="label_gender_male">Male</string>
+    <string name="label_gender_female">Female</string>
+    <string name="label_drink_size">Drink Size</string>
+    <string name="label_alcohol_percentage">Alcohol %</string>
+    <string name="label_bac_level">BAC Level:</string>
+    <string name="label_bac_level_value">0.00</string>
+    <string name="label_status">Your Status:</string>
+    <string name="label_status_value_safe">You\'re safe</string>
+    <string name="label_status_value_cautious">Be careful</string>
+    <string name="label_status_value_unsafe">Over the limit!</string>
+
+    <string name="hint_weight">Enter weight</string>
+
+    <string name="radio_label_drink_size_1">1 oz</string>
+    <string name="radio_label_drink_size_5">5 oz</string>
+    <string name="radio_label_drink_size_12">12 oz</string>
+
+    <string name="button_label_save">Save</string>
+    <string name="button_label_add_drink">Add Drink</string>
+    <string name="button_label_reset">Reset</string>
+</resources>

@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/Users/elizabeththompson/AndroidStudioProjects/InClass05/app/build/intermediates/res/merged/debug/drawable-v21/notification_action_background.xml",
+        "source": "/Users/elizabeththompson/.android/build-cache/7067c9695b597bdedcbd2ca7480371dbf7f5edfa/output/res/drawable-v21/notification_action_background.xml"
+    },
+    {
+        "merged": "/Users/elizabeththompson/AndroidStudioProjects/InClass05/app/build/intermediates/res/merged/debug/drawable-v21/abc_action_bar_item_background_material.xml",
+        "source": "/Users/elizabeththompson/.android/build-cache/7067c9695b597bdedcbd2ca7480371dbf7f5edfa/output/res/drawable-v21/abc_action_bar_item_background_material.xml"
+    },
+    {
+        "merged": "/Users/elizabeththompson/AndroidStudioProjects/InClass05/app/build/intermediates/res/merged/debug/drawable-v21/abc_btn_colored_material.xml",
+        "source": "/Users/elizabeththompson/.android/build-cache/7067c9695b597bdedcbd2ca7480371dbf7f5edfa/output/res/drawable-v21/abc_btn_colored_material.xml"
+    },
+    {
+        "merged": "/Users/elizabeththompson/AndroidStudioProjects/InClass05/app/build/intermediates/res/merged/debug/drawable-v21/abc_edit_text_material.xml",
+        "source": "/Users/elizabeththompson/.android/build-cache/7067c9695b597bdedcbd2ca7480371dbf7f5edfa/output/res/drawable-v21/abc_edit_text_material.xml"
+    }
+]
