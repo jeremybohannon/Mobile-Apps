@@ -155,12 +155,6 @@ public class ContactList extends Fragment {
         void onListFragementInteraction(int index);
     }
 
-    public void createContact(String name, String email, String phone, String department, int imageId) {
-        DatabaseReference root = FirebaseDatabase.getInstance().getReference();
-
-        //Log.d(TAG, "userid: " + user.getUid());
-        //root.child(user.getUid()).child("contactList").setValue("");
-    }
 
     public void getContacts() {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();

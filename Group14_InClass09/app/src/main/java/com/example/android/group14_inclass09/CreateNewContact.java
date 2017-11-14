@@ -13,6 +13,10 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -98,15 +102,21 @@ public class CreateNewContact extends Fragment implements SelectAvatar.OnFragmen
                 int id = grp.getCheckedRadioButtonId();
                 RadioButton dept = getActivity().findViewById(id);
 
+                Contact contact = new Contact(name.getText().toString(), email.getText().toString(),
+                        phone.getText().toString(), dept.getText().toString(),
+                        getArguments().getInt(ARG_PARAM1)+"");
 
-                Contact contact = new Contact(name.getText().toString(), email.getText().toString(), phone.getText().toString(), dept.getText().toString(), getArguments().getInt(
-                        ARG_PARAM1));
+                createContact(contact);
 
                 mListener.onCreateFragmentInteraction(contact);
             }
         });
     }
 
+    public void createContact(Contact contact) {
+        DatabaseReference root = FirebaseDatabase.getInstance().getReference();
+        root.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).push().setValue(contact);
+    }
 
     @Override
     public void onAttach(Context context) {

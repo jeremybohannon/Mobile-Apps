@@ -52,7 +52,7 @@ public class CustomAdapter extends ArrayAdapter<Contact> {
         viewHolder.phone.setText(object.getPhone());
         viewHolder.department.setText(object.getDepartment());
 
-        viewHolder.avatar.setImageResource(object.getImageid());
+        viewHolder.avatar.setImageResource(Integer.parseInt(object.getImageid()));
 
         return view;
     }

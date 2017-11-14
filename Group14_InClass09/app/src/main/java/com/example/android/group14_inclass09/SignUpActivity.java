@@ -82,15 +82,6 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
 
-<<<<<<< HEAD
-    public void signup(String firstname, String lastname, String email, final String password) throws Exception {
-        FirebaseHelper firebaseHelper = new FirebaseHelper(getActivity());
-        firebaseHelper.registerUser(firstname, lastname, email, password);
-
-        Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
-        startActivity(intent);
-    }
-=======
     public void registerUser(String firstname, String lastname, final String email, final String password) {
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(SignUpActivity.this, new OnCompleteListener<AuthResult>() {
@@ -98,7 +89,6 @@ public class SignUpActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
                         Log.d(TAG, "createUserWithEmail:success");
->>>>>>> cb783eec827119012f34ded4dc8d0461a44f7bb5
 
                         Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
                         startActivity(intent);

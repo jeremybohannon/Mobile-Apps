@@ -13,9 +13,9 @@ class Contact implements Serializable{
     private String email;
     private String phone;
     private String department;
-    private int imageid;
+    private String imageid;
 
-    public Contact(String name, String email, String phone, String department, int imageid) {
+    public Contact(String name, String email, String phone, String department, String imageid) {
         this.name = name;
         this.email = email;
         this.department = department;
@@ -55,11 +55,11 @@ class Contact implements Serializable{
         this.department = department;
     }
 
-    public int getImageid() {
+    public String getImageid() {
         return imageid;
     }
 
-    public void setImageid(int imageid) {
+    public void setImageid(String imageid) {
         this.imageid = imageid;
     }
 }
