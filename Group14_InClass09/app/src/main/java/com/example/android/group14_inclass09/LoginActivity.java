@@ -1,5 +1,6 @@
 package com.example.android.group14_inclass09;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements ActivityInterface {
 
     EditText email, password;
     Button loginBtn, signupBtn;
@@ -59,8 +60,15 @@ public class LoginActivity extends AppCompatActivity {
         System.out.println("[LoginActivity | login] " + " Login with email: " + email);
 
         //Authenticate
+        FirebaseHelper firebaseHelper = new FirebaseHelper(getActivity());
+        firebaseHelper.loginUser(email, password);
 
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public Activity getActivity() {
+        return LoginActivity.this;
     }
 }
