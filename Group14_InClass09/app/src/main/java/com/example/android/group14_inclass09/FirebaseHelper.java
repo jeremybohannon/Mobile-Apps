@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -45,7 +46,6 @@ public class FirebaseHelper {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
                         Log.d(TAG, "signInWithEmail:success");
-                        FirebaseUser user = auth.getCurrentUser();
                     } else {
                         Log.w(TAG, "signInWithEmail:failure", task.getException());
                     }
@@ -53,36 +53,31 @@ public class FirebaseHelper {
             });
     }
 
-    public void registerUser(String firstname, String lastname, String email, String password) {
+    public void registerUser(String firstname, String lastname, final String email, final String password) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
                         Log.d(TAG, "createUserWithEmail:success");
-                        FirebaseUser user = auth.getCurrentUser();
-                        initUserData(user);
                     } else {
                         Log.w(TAG, "createUserWithEmail:failure", task.getException());
                     }
                 }
+            })
+            .addOnFailureListener(activity, new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.d(TAG, "createUserWithEmail:failure" + e.getMessage());
+                }
             });
     }
 
-    public void initUserData(FirebaseUser user){
+    public void createContact(String name, String email, String phone, String department, int imageId) {
         DatabaseReference root = dbRef;
 
-        Log.d(TAG, "userid: " + user.getUid());
-
-        root.child(user.getUid()).child("contactList").setValue("");
-        //root.child(user.getUid()).push().setValue("contactList");
-
-//        root.setValue(user.getUid());
-//        root.child(user.getUid()).setValue("contactList");
-    }
-
-    public void createContact(String name, String email, String phone, String department, int imageId) {
-
+        //Log.d(TAG, "userid: " + user.getUid());
+        //root.child(user.getUid()).child("contactList").setValue("");
     }
 
     public void getContacts() {
@@ -92,7 +87,6 @@ public class FirebaseHelper {
         contacts.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                //String value = dataSnapshot.getValue();
                 Log.d(TAG, "Value is: " + dataSnapshot.getValue());
             }
 
