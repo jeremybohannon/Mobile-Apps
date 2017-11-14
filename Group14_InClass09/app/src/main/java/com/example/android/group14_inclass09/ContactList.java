@@ -13,7 +13,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 //Jeremy Bohannon Elizabeth Thompson
-//InClass07
+//InClass09
 //contactlist.java
 
 /**
