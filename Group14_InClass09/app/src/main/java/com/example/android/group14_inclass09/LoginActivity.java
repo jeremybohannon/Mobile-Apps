@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity implements ActivityInterface {
 
@@ -63,8 +65,12 @@ public class LoginActivity extends AppCompatActivity implements ActivityInterfac
         FirebaseHelper firebaseHelper = new FirebaseHelper(getActivity());
         firebaseHelper.loginUser(email, password);
 
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-        startActivity(intent);
+        //if (firebaseHelper.isUserLoggedIn()) {
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
+        //} else {
+            //Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
+        //}
     }
 
     @Override

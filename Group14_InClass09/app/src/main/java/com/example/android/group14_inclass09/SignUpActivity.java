@@ -1,14 +1,17 @@
 package com.example.android.group14_inclass09;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 
-public class SignUpActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity implements ActivityInterface {
 
     EditText firstName, lastName, email, password, repeatPassword;
     Button signUpBtn, cancelBtn;
@@ -47,6 +50,7 @@ public class SignUpActivity extends AppCompatActivity {
                             Toast.makeText(SignUpActivity.this, "Password must be 6 characters long", Toast.LENGTH_SHORT).show();
                         } else {
                             if (passwordVal.equals(repeatPasswordVal)) {
+                                Log.d("Debug", "signing up now");
                                 signup(firstNameVal, lastNameVal, emailVal, passwordVal);
                             } else {
                                 Toast.makeText(SignUpActivity.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
@@ -70,6 +74,17 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     public void signup(String firstname, String lastname, String email, final String password) throws Exception {
+        FirebaseHelper firebaseHelper = new FirebaseHelper(getActivity());
+        firebaseHelper.registerUser(firstname, lastname, email, password);
 
+        firebaseHelper.loginUser(email, password);
+
+        Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public Activity getActivity() {
+        return SignUpActivity.this;
     }
 }

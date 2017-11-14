@@ -62,6 +62,9 @@ public class ContactList extends Fragment {
         super.onActivityCreated(savedInstanceState);
         Log.d("Debug", "OnActivityCreated: " );
 
+        FirebaseHelper firebaseHelper = new FirebaseHelper(getActivity());
+        firebaseHelper.getContacts();
+
         contacts = (ArrayList<Contact>) getArguments().getSerializable(ARG_PARAM1);
 
         if(contacts != null){
