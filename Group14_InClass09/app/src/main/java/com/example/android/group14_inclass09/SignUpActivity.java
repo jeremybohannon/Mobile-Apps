@@ -77,8 +77,6 @@ public class SignUpActivity extends AppCompatActivity implements ActivityInterfa
         FirebaseHelper firebaseHelper = new FirebaseHelper(getActivity());
         firebaseHelper.registerUser(firstname, lastname, email, password);
 
-        firebaseHelper.loginUser(email, password);
-
         Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
         startActivity(intent);
     }

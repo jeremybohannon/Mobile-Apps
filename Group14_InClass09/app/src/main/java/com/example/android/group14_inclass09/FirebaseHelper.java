@@ -53,7 +53,7 @@ public class FirebaseHelper {
             });
     }
 
-    public void registerUser(String firstname, String lastname, String email, String password) {
+    public void registerUser(String firstname, String lastname, final String email, final String password) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
                 @Override
@@ -61,7 +61,7 @@ public class FirebaseHelper {
                     if (task.isSuccessful()) {
                         Log.d(TAG, "createUserWithEmail:success");
                         FirebaseUser user = auth.getCurrentUser();
-                        initUserData(user);
+                        loginUser(email, password);
                     } else {
                         Log.w(TAG, "createUserWithEmail:failure", task.getException());
                     }
@@ -69,21 +69,10 @@ public class FirebaseHelper {
             });
     }
 
-    public void initUserData(FirebaseUser user){
-        DatabaseReference root = dbRef;
-
-        Log.d(TAG, "userid: " + user.getUid());
-
-        root.child(user.getUid()).child("contactList").setValue("");
-        //root.child(user.getUid()).push().setValue("contactList");
-
-//        root.setValue(user.getUid());
-//        root.child(user.getUid()).setValue("contactList");
-    }
-
     public void createContact(String name, String email, String phone, String department, int imageId) {
 
     }
+
 
     public void getContacts() {
         FirebaseUser currentUser = auth.getCurrentUser();
