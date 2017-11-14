@@ -2,6 +2,7 @@ package com.example.android.group14_inclass09;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,8 +11,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
-public class SignUpActivity extends AppCompatActivity implements ActivityInterface {
+
+public class SignUpActivity extends AppCompatActivity {
+
+    private final String TAG = "Debug";
 
     EditText firstName, lastName, email, password, repeatPassword;
     Button signUpBtn, cancelBtn;
@@ -51,7 +60,7 @@ public class SignUpActivity extends AppCompatActivity implements ActivityInterfa
                         } else {
                             if (passwordVal.equals(repeatPasswordVal)) {
                                 Log.d("Debug", "signing up now");
-                                signup(firstNameVal, lastNameVal, emailVal, passwordVal);
+                                registerUser(firstNameVal, lastNameVal, emailVal, passwordVal);
                             } else {
                                 Toast.makeText(SignUpActivity.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
                             }
@@ -73,18 +82,20 @@ public class SignUpActivity extends AppCompatActivity implements ActivityInterfa
         });
     }
 
-    public void signup(String firstname, String lastname, String email, final String password) throws Exception {
-        FirebaseHelper firebaseHelper = new FirebaseHelper(getActivity());
-        firebaseHelper.registerUser(firstname, lastname, email, password);
+    public void registerUser(String firstname, String lastname, final String email, final String password) {
+        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(SignUpActivity.this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        Log.d(TAG, "createUserWithEmail:success");
 
-        firebaseHelper.loginUser(email, password);
-
-        Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
-        startActivity(intent);
-    }
-
-    @Override
-    public Activity getActivity() {
-        return SignUpActivity.this;
+                        Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                    }
+                }
+            });
     }
 }

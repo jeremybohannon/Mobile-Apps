@@ -11,6 +11,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 //Jeremy Bohannon Elizabeth Thompson
 //InClass09
@@ -25,6 +33,9 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class ContactList extends Fragment {
+
+    private final String TAG = "Debug";
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -62,8 +73,7 @@ public class ContactList extends Fragment {
         super.onActivityCreated(savedInstanceState);
         Log.d("Debug", "OnActivityCreated: " );
 
-        FirebaseHelper firebaseHelper = new FirebaseHelper(getActivity());
-        firebaseHelper.getContacts();
+        getContacts();
 
         contacts = (ArrayList<Contact>) getArguments().getSerializable(ARG_PARAM1);
 
@@ -143,5 +153,29 @@ public class ContactList extends Fragment {
         // TODO: Update argument type and name
         void onListFragmentInteraction();
         void onListFragementInteraction(int index);
+    }
+
+    public void createContact(String name, String email, String phone, String department, int imageId) {
+        DatabaseReference root = FirebaseDatabase.getInstance().getReference();
+
+        //Log.d(TAG, "userid: " + user.getUid());
+        //root.child(user.getUid()).child("contactList").setValue("");
+    }
+
+    public void getContacts() {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference contacts = FirebaseDatabase.getInstance().getReference().child(currentUser.getUid()).child("contactList");
+
+        contacts.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.d(TAG, "Value is: " + dataSnapshot.getValue());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
     }
 }

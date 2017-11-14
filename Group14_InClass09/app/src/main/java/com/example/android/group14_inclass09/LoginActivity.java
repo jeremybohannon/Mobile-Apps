@@ -2,6 +2,7 @@ package com.example.android.group14_inclass09;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,7 +11,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class LoginActivity extends AppCompatActivity implements ActivityInterface {
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
+public class LoginActivity extends AppCompatActivity {
+
+    private final String TAG = "Debug";
 
     EditText email, password;
     Button loginBtn, signupBtn;
@@ -28,20 +36,20 @@ public class LoginActivity extends AppCompatActivity implements ActivityInterfac
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("[LoginActivity | onCreate | loginBtn click] " + " Login btn clicked");
-                try {
-                    String loginEmail = email.getText().toString();
-                    String loginPassword = password.getText().toString();
+            System.out.println("[LoginActivity | onCreate | loginBtn click] " + " Login btn clicked");
+            try {
+                String loginEmail = email.getText().toString();
+                String loginPassword = password.getText().toString();
 
-                    if(loginEmail.isEmpty() || loginPassword.isEmpty()) {
-                        System.out.println("[LoginActivity | onCreate | loginBtn click] " + " Empty credentials");
+                if(loginEmail.isEmpty() || loginPassword.isEmpty()) {
+                    System.out.println("[LoginActivity | onCreate | loginBtn click] " + " Empty credentials");
 
-                    } else {
-                        login(loginEmail, loginPassword);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
+                } else {
+                    loginUser(loginEmail, loginPassword);
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             }
         });
 
@@ -50,31 +58,28 @@ public class LoginActivity extends AppCompatActivity implements ActivityInterfac
         signupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("[LoginActivity | onCreate | signUp click] " + " Sign up btn clicked");
-                Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
-                startActivity(intent);
+            System.out.println("[LoginActivity | onCreate | signUp click] " + " Sign up btn clicked");
+            Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+            startActivity(intent);
             }
         });
 
     }
 
-    public void login(String email, String password) throws Exception {
-        System.out.println("[LoginActivity | login] " + " Login with email: " + email);
+    public void loginUser(String email, String password) {
+        FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        Log.d(TAG, "signInWithEmail:success");
 
-        //Authenticate
-        FirebaseHelper firebaseHelper = new FirebaseHelper(getActivity());
-        firebaseHelper.loginUser(email, password);
-
-        //if (firebaseHelper.isUserLoggedIn()) {
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(intent);
-        //} else {
-            //Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
-        //}
-    }
-
-    @Override
-    public Activity getActivity() {
-        return LoginActivity.this;
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Log.w(TAG, "signInWithEmail:failure", task.getException());
+                    }
+                }
+            });
     }
 }
