@@ -90,13 +90,13 @@ public class CreateNewContact extends Fragment implements SelectAvatar.OnFragmen
         getActivity().findViewById(R.id.submitBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText name = (EditText) getActivity().findViewById(R.id.name);
-                EditText email = (EditText) getActivity().findViewById(R.id.email);
-                EditText phone = (EditText) getActivity().findViewById(R.id.phone);
-                RadioGroup grp = (RadioGroup) getActivity().findViewById(R.id.departmentGroup);
+                EditText name = getActivity().findViewById(R.id.name);
+                EditText email = getActivity().findViewById(R.id.email);
+                EditText phone = getActivity().findViewById(R.id.phone);
+                RadioGroup grp = getActivity().findViewById(R.id.departmentGroup);
 
                 int id = grp.getCheckedRadioButtonId();
-                RadioButton dept = (RadioButton) getActivity().findViewById(id);
+                RadioButton dept = getActivity().findViewById(id);
 
                 Contact contact = new Contact(name.getText().toString(), email.getText().toString(), phone.getText().toString(), dept.getText().toString(), getArguments().getInt(
                         ARG_PARAM1));

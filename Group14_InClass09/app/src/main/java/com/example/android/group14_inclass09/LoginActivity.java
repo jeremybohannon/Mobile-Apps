@@ -7,8 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.android.group14_inclass09.R;
-
 public class LoginActivity extends AppCompatActivity {
 
     EditText email, password;
@@ -60,8 +58,9 @@ public class LoginActivity extends AppCompatActivity {
     public void login(String email, String password) throws Exception {
         System.out.println("[LoginActivity | login] " + " Login with email: " + email);
 
+        //Authenticate
 
-
-
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        startActivity(intent);
     }
 }
