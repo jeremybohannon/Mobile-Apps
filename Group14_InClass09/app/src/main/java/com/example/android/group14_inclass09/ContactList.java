@@ -73,9 +73,9 @@ public class ContactList extends Fragment {
         super.onActivityCreated(savedInstanceState);
         Log.d("Debug", "OnActivityCreated: " );
 
-        getContacts();
 
-        contacts = (ArrayList<Contact>) getArguments().getSerializable(ARG_PARAM1);
+
+        contacts = getContacts();
 
         if(contacts != null){
             Log.d("Debug", "OnActivityCreated: " + contacts.size());
@@ -156,9 +156,10 @@ public class ContactList extends Fragment {
     }
 
 
-    public void getContacts() {
+    public ArrayList<Contact> getContacts() {
+        ArrayList<Contact> contactsList = new ArrayList<>();
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        DatabaseReference contacts = FirebaseDatabase.getInstance().getReference().child(currentUser.getUid()).child("contactList");
+        DatabaseReference contacts = FirebaseDatabase.getInstance().getReference().child(currentUser.getUid());
 
         contacts.addValueEventListener(new ValueEventListener() {
             @Override
@@ -171,5 +172,6 @@ public class ContactList extends Fragment {
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
+        return contactsList;
     }
 }

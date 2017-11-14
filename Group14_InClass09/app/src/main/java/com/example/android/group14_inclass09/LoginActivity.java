@@ -28,8 +28,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        email = (EditText) findViewById(R.id.email);
-        password = (EditText) findViewById(R.id.password);
+        email = findViewById(R.id.email);
+        password = findViewById(R.id.password);
 
         loginBtn = (Button) findViewById(R.id.loginBtn);
 
@@ -43,7 +43,6 @@ public class LoginActivity extends AppCompatActivity {
 
                 if(loginEmail.isEmpty() || loginPassword.isEmpty()) {
                     System.out.println("[LoginActivity | onCreate | loginBtn click] " + " Empty credentials");
-
                 } else {
                     loginUser(loginEmail, loginPassword);
                 }
@@ -53,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        signupBtn = (Button) findViewById(R.id.signupBtn);
+        signupBtn = findViewById(R.id.signupBtn);
 
         signupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,16 +66,19 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void loginUser(String email, String password) {
+        System.out.println("[LoginActivity | loginUser] " + "In loginUser with email: " + email);
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
+                        System.out.println("[LoginActivity | loginUser] " + "Sign up successful");
                         Log.d(TAG, "signInWithEmail:success");
 
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
                     } else {
+                        System.out.println("[LoginActivity | loginUser] " + "Sign up unsuccessful");
                         Log.w(TAG, "signInWithEmail:failure", task.getException());
                     }
                 }
