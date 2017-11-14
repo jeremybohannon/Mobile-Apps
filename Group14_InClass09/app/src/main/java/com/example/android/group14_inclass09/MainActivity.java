@@ -1,12 +1,7 @@
-package com.example.android.group14_inclass07;
+package com.example.android.group14_inclass09;
 
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 
 import java.util.ArrayList;
 //Jeremy Bohannon Elizabeth Thompson

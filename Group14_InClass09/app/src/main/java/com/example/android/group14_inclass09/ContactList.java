@@ -1,7 +1,6 @@
-package com.example.android.group14_inclass07;
+package com.example.android.group14_inclass09;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,15 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
-
-import static android.R.id.list;
 //Jeremy Bohannon Elizabeth Thompson
 //InClass07
 //contactlist.java
