@@ -162,17 +162,20 @@ public class ContactList extends Fragment {
                 GenericTypeIndicator<Map<String, Contact>> genericTypeIndicator = new GenericTypeIndicator<Map<String, Contact>>() {};
                 Map<String, Contact> map = dataSnapshot.getValue(genericTypeIndicator );
 
+                if (map != null) {
+                    for (String key : map.keySet()) {
+                        contactsList.add(map.get(key));
+                    }
+                    Log.d("Debug", "getContacts: " + map.size());
 
-                for ( String key : map.keySet() ) {
-                    contactsList.add(map.get(key));
+                    lv = context.findViewById(R.id.contactView);
+                    customAdapter = new CustomAdapter(context, R.layout.fragment_contact_list, contactsList);
+                    lv.setAdapter(customAdapter);
+                    lv.setLongClickable(true);
+                    lv.setOnItemLongClickListener(longListener);
+
                 }
-                Log.d("Debug", "getContacts: " + map.size());
-                lv = context.findViewById(R.id.contactView);
 
-                customAdapter = new CustomAdapter(context, R.layout.fragment_contact_list, contactsList);
-                lv.setAdapter(customAdapter);
-                lv.setLongClickable(true);
-                lv.setOnItemLongClickListener(longListener);
             }
 
             @Override
