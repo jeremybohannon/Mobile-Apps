@@ -85,12 +85,14 @@ public class LoginActivity extends AppCompatActivity {
                     progress.dismiss();
                     if (task.isSuccessful()) {
                         System.out.println("[LoginActivity | loginUser] " + "Sign up successful");
+                        Toast.makeText(LoginActivity.this, "You've been logged in!", Toast.LENGTH_SHORT).show();
                         Log.d(TAG, "signInWithEmail:success");
 
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
                     } else {
                         System.out.println("[LoginActivity | loginUser] " + "Sign up unsuccessful");
+                        Toast.makeText(LoginActivity.this, "No user found or wrong credintials!", Toast.LENGTH_SHORT).show();
                         Log.w(TAG, "signInWithEmail:failure", task.getException());
                     }
                 }

@@ -99,6 +99,7 @@ public class SignUpActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
                         Log.d(TAG, "createUserWithEmail:success");
+                        Toast.makeText(SignUpActivity.this, "You've been signed up!", Toast.LENGTH_SHORT).show();
                         progress.dismiss();
 //                        DatabaseReference root = FirebaseDatabase.getInstance().getReference();
 //                        root.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).push().setValue(new Contact());
@@ -107,6 +108,7 @@ public class SignUpActivity extends AppCompatActivity {
                         startActivity(intent);
                     } else {
                         progress.dismiss();
+                        Toast.makeText(SignUpActivity.this, "Email in use!", Toast.LENGTH_SHORT).show();
                         Log.w(TAG, "createUserWithEmail:failure", task.getException());
                     }
                 }
