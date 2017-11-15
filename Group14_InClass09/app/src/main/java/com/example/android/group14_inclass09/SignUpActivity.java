@@ -1,6 +1,7 @@
 package com.example.android.group14_inclass09;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 public class SignUpActivity extends AppCompatActivity {
@@ -24,11 +27,13 @@ public class SignUpActivity extends AppCompatActivity {
 
     EditText firstName, lastName, email, password, repeatPassword;
     Button signUpBtn, cancelBtn;
+    ProgressDialog progress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+        progress = new ProgressDialog(this);
 
         setTitle("Sign Up");
 
@@ -83,16 +88,25 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     public void registerUser(String firstname, String lastname, final String email, final String password) {
+        progress.setTitle("Loading");
+        progress.setMessage("Signing you up!");
+        progress.setCancelable(false);
+        progress.show();
+
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(SignUpActivity.this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
                         Log.d(TAG, "createUserWithEmail:success");
+                        progress.dismiss();
+//                        DatabaseReference root = FirebaseDatabase.getInstance().getReference();
+//                        root.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).push().setValue(new Contact());
 
                         Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
                         startActivity(intent);
                     } else {
+                        progress.dismiss();
                         Log.w(TAG, "createUserWithEmail:failure", task.getException());
                     }
                 }

@@ -22,7 +22,7 @@ class Contact implements Serializable{
         this.email = "";
         this.phone = "";
         this.department = "";
-        this.imageid = "";
+        this.imageid = "0";
     }
 
     public Contact(String name, String email, String phone, String department, String imageid) {

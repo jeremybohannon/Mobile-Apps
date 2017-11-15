@@ -38,6 +38,7 @@ import java.util.Map;
 public class ContactList extends Fragment {
 
     private final String TAG = "Debug";
+    FirebaseUser currentUser;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -76,6 +77,7 @@ public class ContactList extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         Log.d("Debug", "OnActivityCreated: " );
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
         context = getActivity();
 
         contacts = getContacts();
@@ -92,15 +94,15 @@ public class ContactList extends Fragment {
     AdapterView.OnItemLongClickListener longListener = new AdapterView.OnItemLongClickListener() {
         @Override
         public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+            System.out.println("COTNACTS SIZE:  " + contacts.size());
             if(contacts.size() > 0) {
                 String hash = contacts.get(i).getHash();
-                FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
                 DatabaseReference contactsDB = FirebaseDatabase.getInstance().getReference().child(currentUser.getUid());
 
                 contactsDB.child(hash).removeValue();
 
-
                 contacts = getContacts();
+                customAdapter.notifyDataSetChanged();
             }
             return false;
         }
@@ -108,7 +110,7 @@ public class ContactList extends Fragment {
 
     public ArrayList<Contact> getContacts() {
         final ArrayList<Contact> contactsList = new ArrayList<>();
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
         DatabaseReference contacts = FirebaseDatabase.getInstance().getReference().child(currentUser.getUid());
 
         contacts.addValueEventListener(new ValueEventListener() {
@@ -136,7 +138,17 @@ public class ContactList extends Fragment {
                     lv.setOnItemLongClickListener(longListener);
 
                     customAdapter.notifyDataSetChanged();
+                } else {
+                    lv = context.findViewById(R.id.contactView);
 
+                    ArrayList<Contact> empty = new ArrayList<>();
+
+                    customAdapter = new CustomAdapter(context, R.layout.fragment_contact_list, empty);
+                    lv.setAdapter(customAdapter);
+                    lv.setLongClickable(true);
+                    lv.setOnItemLongClickListener(longListener);
+
+                    customAdapter.notifyDataSetChanged();
                 }
 
             }
