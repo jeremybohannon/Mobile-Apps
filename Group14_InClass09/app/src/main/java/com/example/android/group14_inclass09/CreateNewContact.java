@@ -103,8 +103,8 @@ public class CreateNewContact extends Fragment implements SelectAvatar.OnFragmen
                 RadioButton dept = getActivity().findViewById(id);
 
                 Contact contact = new Contact(name.getText().toString(), email.getText().toString(),
-                        phone.getText().toString(), dept.getText().toString(),
-                        getArguments().getInt(ARG_PARAM1)+"");
+                phone.getText().toString(), dept.getText().toString(),
+                getArguments().getInt(ARG_PARAM1)+"");
 
                 createContact(contact);
 

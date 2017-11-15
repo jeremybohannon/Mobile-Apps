@@ -1,5 +1,6 @@
 package com.example.android.group14_inclass09;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -50,9 +51,10 @@ public class ContactList extends Fragment {
     private OnFragmentInteractionListener mListener;
     ListView lv;
     CustomAdapter customAdapter;
-
+    Activity context;
     public ContactList() {
         // Required empty public constructor
+
     }
 
     /**
@@ -74,8 +76,10 @@ public class ContactList extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         Log.d("Debug", "OnActivityCreated: " );
-
+        context = getActivity();
         contacts = getContacts();
+
+
 
         getActivity().findViewById(R.id.newContactBtn).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -163,14 +167,12 @@ public class ContactList extends Fragment {
                     contactsList.add(map.get(key));
                 }
                 Log.d("Debug", "getContacts: " + map.size());
+                lv = context.findViewById(R.id.contactView);
 
-                lv = getActivity().findViewById(R.id.contactView);
-
-                customAdapter = new CustomAdapter(getActivity(), R.layout.fragment_contact_list, contactsList);
+                customAdapter = new CustomAdapter(context, R.layout.fragment_contact_list, contactsList);
                 lv.setAdapter(customAdapter);
                 lv.setLongClickable(true);
                 lv.setOnItemLongClickListener(longListener);
-
             }
 
             @Override
@@ -178,6 +180,7 @@ public class ContactList extends Fragment {
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
+        System.out.println("Returning the list!!!!!");
         return contactsList;
     }
 }
