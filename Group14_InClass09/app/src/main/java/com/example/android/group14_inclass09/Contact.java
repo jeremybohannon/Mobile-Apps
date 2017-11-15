@@ -4,7 +4,8 @@ import java.io.Serializable;
 
 /**
  * Created by jeremybohannon on 10/30/17.
- *///Jeremy Bohannon Elizabeth Thompson
+ */
+//Jeremy Bohannon Elizabeth Thompson
 //InClass09
 //contact.java
 
@@ -14,6 +15,14 @@ class Contact implements Serializable{
     private String phone;
     private String department;
     private String imageid;
+
+    public Contact() {
+        this.name = "";
+        this.email = "";
+        this.phone = "";
+        this.department = "";
+        this.imageid = "";
+    }
 
     public Contact(String name, String email, String phone, String department, String imageid) {
         this.name = name;

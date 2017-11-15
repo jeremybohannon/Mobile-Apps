@@ -17,9 +17,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Map;
 //Jeremy Bohannon Elizabeth Thompson
 //InClass09
 //contactlist.java
@@ -73,20 +75,7 @@ public class ContactList extends Fragment {
         super.onActivityCreated(savedInstanceState);
         Log.d("Debug", "OnActivityCreated: " );
 
-
-
         contacts = getContacts();
-
-        if(contacts != null){
-            Log.d("Debug", "OnActivityCreated: " + contacts.size());
-            lv = getActivity().findViewById(R.id.contactView);
-
-            customAdapter = new CustomAdapter(getActivity(), R.layout.fragment_contact_list, contacts);
-            lv.setAdapter(customAdapter);
-            lv.setLongClickable(true);
-            lv.setOnItemLongClickListener(longListener);
-
-        }
 
         getActivity().findViewById(R.id.newContactBtn).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,6 +89,7 @@ public class ContactList extends Fragment {
     AdapterView.OnItemLongClickListener longListener = new AdapterView.OnItemLongClickListener() {
         @Override
         public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+            
             contacts.remove(i);
             customAdapter.notifyDataSetChanged();
 
@@ -157,7 +147,7 @@ public class ContactList extends Fragment {
 
 
     public ArrayList<Contact> getContacts() {
-        ArrayList<Contact> contactsList = new ArrayList<>();
+        final ArrayList<Contact> contactsList = new ArrayList<>();
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference contacts = FirebaseDatabase.getInstance().getReference().child(currentUser.getUid());
 
@@ -165,6 +155,22 @@ public class ContactList extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Log.d(TAG, "Value is: " + dataSnapshot.getValue());
+                GenericTypeIndicator<Map<String, Contact>> genericTypeIndicator = new GenericTypeIndicator<Map<String, Contact>>() {};
+                Map<String, Contact> map = dataSnapshot.getValue(genericTypeIndicator );
+
+
+                for ( String key : map.keySet() ) {
+                    contactsList.add(map.get(key));
+                }
+                Log.d("Debug", "getContacts: " + map.size());
+
+                lv = getActivity().findViewById(R.id.contactView);
+
+                customAdapter = new CustomAdapter(getActivity(), R.layout.fragment_contact_list, contactsList);
+                lv.setAdapter(customAdapter);
+                lv.setLongClickable(true);
+                lv.setOnItemLongClickListener(longListener);
+
             }
 
             @Override
