@@ -12,8 +12,6 @@ public class MainActivity extends AppCompatActivity implements ContactList.OnFra
 
     ArrayList<Contact> contacts = new ArrayList<>();
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
