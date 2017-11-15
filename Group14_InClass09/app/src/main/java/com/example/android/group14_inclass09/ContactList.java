@@ -77,9 +77,8 @@ public class ContactList extends Fragment {
         super.onActivityCreated(savedInstanceState);
         Log.d("Debug", "OnActivityCreated: " );
         context = getActivity();
+
         contacts = getContacts();
-
-
 
         getActivity().findViewById(R.id.newContactBtn).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,13 +92,62 @@ public class ContactList extends Fragment {
     AdapterView.OnItemLongClickListener longListener = new AdapterView.OnItemLongClickListener() {
         @Override
         public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-            
-            contacts.remove(i);
-            customAdapter.notifyDataSetChanged();
+            if(contacts.size() > 0) {
+                String hash = contacts.get(i).getHash();
+                FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                DatabaseReference contactsDB = FirebaseDatabase.getInstance().getReference().child(currentUser.getUid());
 
+                contactsDB.child(hash).removeValue();
+
+
+                contacts = getContacts();
+            }
             return false;
         }
     };
+
+    public ArrayList<Contact> getContacts() {
+        final ArrayList<Contact> contactsList = new ArrayList<>();
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference contacts = FirebaseDatabase.getInstance().getReference().child(currentUser.getUid());
+
+        contacts.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.d(TAG, "Value is: " + dataSnapshot.getValue());
+                GenericTypeIndicator<Map<String, Contact>> genericTypeIndicator = new GenericTypeIndicator<Map<String, Contact>>() {};
+                Map<String, Contact> map = dataSnapshot.getValue(genericTypeIndicator );
+
+                if (map != null) {
+                    for (String key : map.keySet()) {
+                        Contact contact = map.get(key);
+                        contact.setHash(key);
+                        contactsList.add(contact);
+                    }
+                    Log.d("Debug", "getContacts: " + map.size());
+
+                    lv = context.findViewById(R.id.contactView);
+
+                    System.out.println("List size: " + contactsList.size());
+
+                    customAdapter = new CustomAdapter(context, R.layout.fragment_contact_list, contactsList);
+                    lv.setAdapter(customAdapter);
+                    lv.setLongClickable(true);
+                    lv.setOnItemLongClickListener(longListener);
+
+                    customAdapter.notifyDataSetChanged();
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+        return contactsList;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -150,40 +198,5 @@ public class ContactList extends Fragment {
     }
 
 
-    public ArrayList<Contact> getContacts() {
-        final ArrayList<Contact> contactsList = new ArrayList<>();
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        DatabaseReference contacts = FirebaseDatabase.getInstance().getReference().child(currentUser.getUid());
 
-        contacts.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.d(TAG, "Value is: " + dataSnapshot.getValue());
-                GenericTypeIndicator<Map<String, Contact>> genericTypeIndicator = new GenericTypeIndicator<Map<String, Contact>>() {};
-                Map<String, Contact> map = dataSnapshot.getValue(genericTypeIndicator );
-
-                if (map != null) {
-                    for (String key : map.keySet()) {
-                        contactsList.add(map.get(key));
-                    }
-                    Log.d("Debug", "getContacts: " + map.size());
-
-                    lv = context.findViewById(R.id.contactView);
-                    customAdapter = new CustomAdapter(context, R.layout.fragment_contact_list, contactsList);
-                    lv.setAdapter(customAdapter);
-                    lv.setLongClickable(true);
-                    lv.setOnItemLongClickListener(longListener);
-
-                }
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                Log.w(TAG, "Failed to read value.", error.toException());
-            }
-        });
-        System.out.println("Returning the list!!!!!");
-        return contactsList;
-    }
 }

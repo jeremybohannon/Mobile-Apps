@@ -32,11 +32,11 @@ public class SignUpActivity extends AppCompatActivity {
 
         setTitle("Sign Up");
 
-        firstName = (EditText) findViewById(R.id.firstNameText);
-        lastName = (EditText) findViewById(R.id.lastNameText);
-        email = (EditText) findViewById(R.id.emailText);
-        password = (EditText) findViewById(R.id.passwordText);
-        repeatPassword = (EditText) findViewById(R.id.repeatPasswordText);
+        firstName = findViewById(R.id.firstNameText);
+        lastName = findViewById(R.id.lastNameText);
+        email = findViewById(R.id.emailText);
+        password = findViewById(R.id.passwordText);
+        repeatPassword = findViewById(R.id.repeatPasswordText);
 
         signUpBtn = (Button) findViewById(R.id.signUpBtn);
 

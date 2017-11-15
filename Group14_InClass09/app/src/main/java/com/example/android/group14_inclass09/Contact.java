@@ -15,6 +15,7 @@ class Contact implements Serializable{
     private String phone;
     private String department;
     private String imageid;
+    private String hash;
 
     public Contact() {
         this.name = "";
@@ -30,6 +31,14 @@ class Contact implements Serializable{
         this.department = department;
         this.phone = phone;
         this.imageid = imageid;
+    }
+
+    public String getHash() {
+        return hash;
+    }
+
+    public void setHash(String hash) {
+        this.hash = hash;
     }
 
     public String getName() {

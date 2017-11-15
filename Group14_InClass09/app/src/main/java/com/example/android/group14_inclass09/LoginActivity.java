@@ -1,6 +1,7 @@
 package com.example.android.group14_inclass09;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -22,11 +23,13 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText email, password;
     Button loginBtn, signupBtn;
+    ProgressDialog progress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        progress = new ProgressDialog(this);
 
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
@@ -67,10 +70,19 @@ public class LoginActivity extends AppCompatActivity {
 
     public void loginUser(String email, String password) {
         System.out.println("[LoginActivity | loginUser] " + "In loginUser with email: " + email);
+
+
+        progress.setTitle("Loading");
+        progress.setMessage("Logging you in!");
+        progress.setCancelable(false);
+        progress.show();
+
+
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
+                    progress.dismiss();
                     if (task.isSuccessful()) {
                         System.out.println("[LoginActivity | loginUser] " + "Sign up successful");
                         Log.d(TAG, "signInWithEmail:success");
