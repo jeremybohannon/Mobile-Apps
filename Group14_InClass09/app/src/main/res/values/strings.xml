@@ -25,4 +25,5 @@
     <string name="label_password">Password</string>
     <string name="button_lable_login">Login</string>
     <string name="label_signup_link">Signup</string>
+    <string name="logout">Logout</string>
 </resources>
