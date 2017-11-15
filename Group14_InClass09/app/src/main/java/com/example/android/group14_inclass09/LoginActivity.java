@@ -92,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(intent);
                     } else {
                         System.out.println("[LoginActivity | loginUser] " + "Sign up unsuccessful");
-                        Toast.makeText(LoginActivity.this, "No user found or wrong credintials!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "No user found or wrong credentials!", Toast.LENGTH_SHORT).show();
                         Log.w(TAG, "signInWithEmail:failure", task.getException());
                     }
                 }
